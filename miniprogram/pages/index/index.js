@@ -24,11 +24,11 @@ Page({
       name: 'login',
       data: {},
       success: res => {
-        console.log('[云函数] [login] user openid: ', res.result.openid)
-        console.log('[云函数] [login] user unionid: ', res.result.unionid)
-        app.globalData.userInfo = res.result
+        console.log('[云函数] [login] user openid: ', res)
+        app.globalData.userid = res.result.data1
+        app.globalData.userinfo = res.result.data2
         console.log('查询用户信息', res)
-        if (res.result.record.length == 0){
+        if (res.result.data1.length == 0){
           console.log('没有查找到用户信息，跳转到注册页面')
           wx.navigateTo({
             url: '../sign/sign',
@@ -36,9 +36,6 @@ Page({
       },
       fail: err => {
         console.error('[云函数] [login] 调用失败', err)
-        wx.navigateTo({
-          url: '../deployFunctions/deployFunctions',
-        })
       }
     })   
   },
