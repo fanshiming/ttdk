@@ -10,7 +10,7 @@
 		"enhance": true
 	},
 	"appid": "wx7b1d292698e32724",
-	"projectname": "miniprogram-4",
+	"projectname": "ttdk",
 	"libVersion": "2.8.1",
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
@@ -32,13 +32,7 @@
 		},
 		"miniprogram": {
 			"current": 0,
-			"list": [
-				{
-					"id": -1,
-					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide"
-				}
-			]
+			"list": []
 		}
 	}
 }

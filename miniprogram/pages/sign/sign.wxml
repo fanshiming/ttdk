@@ -1,0 +1,36 @@
+<view class="setction item">
+姓名：<input placeholder="大名"></input>
+</view>
+
+<view class="setction item">
+健康码：<input placeholder="上传"></input>
+</view>
+
+<view class="setction item">
+<picker mode="date" value="{{date}}" start="2019-12-31" end="2020-09-01" bindchange="bindDateChange">
+    <view class="picker">
+      返京日期: {{date}}
+    </view>
+  </picker>
+</view>
+
+<view class="setction item">
+组织名称：<input placeholder="公司"></input>
+</view>
+
+<view class="setction item">
+  <picker bindchange="bindPickerChange" value="{{laiwang_index}}" range="{{laiwang}}">
+    <view class="picker">
+      访客事由：{{laiwang[laiwang_index]}}
+    </view>
+  </picker>
+</view>
+
+<view class="setction item">
+口令：<input placeholder="联系人索取口令"></input>
+</view>
+
+<view>
+<button>签到</button>
+</view>
+
