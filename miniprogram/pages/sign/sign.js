@@ -5,7 +5,28 @@ Page({
    * 页面的初始数据
    */
   data: {
+    name: '',
+    health: '',
+    part: '',
+    role: '配合测试',
+    laiwang: ['配合测试', '外协', '借调'],
+    laiwang_index: 0,
+    date: '2019-12-31',
+    token: ''
+  },
 
+  bindPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      laiwang_index: e.detail.value
+    })
+  },
+
+  bindDateChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      date: e.detail.value
+    })
   },
 
   /**
