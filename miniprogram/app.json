@@ -1,6 +1,8 @@
 {
   "pages": [
-    "pages/sign/sign"
+    "pages/index/index",
+    "pages/sign/sign",
+    "pages/chooseLib/chooseLib"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
