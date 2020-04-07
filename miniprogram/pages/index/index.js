@@ -4,8 +4,6 @@ const app = getApp()
 Page({
   data: {
     avatarUrl: './user-unlogin.png',
-    userInfo: {},
-    logged: false,
     takeSession: false,
     requestResult: ''
   },
@@ -29,10 +27,16 @@ Page({
         app.globalData.userinfo = res.result.data2
         console.log('查询用户信息', res)
         if (res.result.data1.length == 0){
+          app.globalData.logged = false
           console.log('没有查找到用户信息，跳转到注册页面')
           wx.navigateTo({
             url: '../sign/sign',
-        })}   
+        })} 
+        else{
+          app.globalData.logged = true
+          app.globalData.baseUser = res.result.data1
+          app.globalData.ttdkUser = res.result.data2
+        }  
       },
       fail: err => {
         console.error('[云函数] [login] 调用失败', err)

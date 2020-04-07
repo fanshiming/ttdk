@@ -8,11 +8,20 @@ Page({
     name: '',
     health: '',
     part: '',
+    bird: ['火车', '飞机', '自驾'],
+    bird_index: 0,
     role: '配合测试',
     laiwang: ['配合测试', '外协', '借调'],
     laiwang_index: 0,
     date: '2019-12-31',
     token: ''
+  },
+
+  bindBirdPickerChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      bird_index: e.detail.value
+    })
   },
 
   bindPickerChange: function (e) {
