@@ -1,9 +1,9 @@
 <view class="setction item">
-姓名：<input placeholder="大名"></input>
+姓名：<input placeholder="大名" value="{{name}}" bindinput="getInputName" />
 </view>
 
 <view class="setction item">
-手机：<input placeholder="12345678901"></input>
+手机：<input placeholder="12345678901" value="{{phone}}" bindinput="getInputPhone" />
 </view>
 
 <view class="setction item">
@@ -17,28 +17,28 @@
 <view class="section item">
   <picker bindchange="bindBirdPickerChange" value="{{bird_index}}" range="{{bird}}">
     <view class="picker">
-      当前选择：{{bird[bird_index]}}
+      返京方式：{{bird[bird_index]}}
     </view>
   </picker>
 </view>
 
 <view class="setction item">
-组织名称：<input placeholder="公司"></input>
+组织名称：<input placeholder="公司" value="{{part}}" bindinput="getInputPart" />
 </view>
 
 <view class="setction item">
   <picker bindchange="bindPickerChange" value="{{laiwang_index}}" range="{{laiwang}}">
     <view class="picker">
-      访客事由：{{laiwang[laiwang_index]}}
+      组：{{laiwang[laiwang_index]}}
     </view>
   </picker>
 </view>
 
 <view class="setction item">
-口令：<input placeholder="联系人索取口令"></input>
+口令：<input placeholder="联系人索取口令" value="{{token}}" bindinput="getInputToken" />
 </view>
 
 <view>
-<button>提交</button>
+<button bindtap="submit">提交</button>
 </view>
 

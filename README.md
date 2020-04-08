@@ -1,25 +1,32 @@
 建立用户体系
-   用户数据在 app.globalData 中
-   {
-     logged, false 尚未登陆， true 已登陆
-     baseUser: {     
-      openid, unionid,  来自微信系统的唯一标识 
-      sn,   用户的唯一标识
-      }
-
-      ttdkUser: {
-  _id, baseUser.sn
-   name, 用户姓名
-   part,  公司名称
-   phone, 手机号
-   date, 返京日期
-   memo, 返京交通方式等备注
-      }
-   }
+   info_users_ttdk
 
 云函数 login
-    如果是已注册用户，返回用户注册信息[{openid, unionid, sn}] [name, phone, part, role,...]
-    如果未注册用户， 且无注册口令，返回的用户信息是空[]
+  功能：登陆用户
+  参数：空
+  返回：res.result.data[]
+    如果 res.result.data长度为0，则该用户未注册，如果长度为1，则 res.result.data[0]是用户注册信息
+    data[0] = 
+    {
+      name: 姓名,
+      phone: 电话,
+      part: 公司信息,
+      date: 返京日期,
+      role: 来访角色,
+      memo: 返京交通工具,
+    }
 
-云函数 signin
-    如果未注册已用户，且提供了注册口令和注册信息，则注册该用户，返回用户注册信息
+云函数 register
+    功能：注册用户
+    参数：data = {
+      name: 姓名,
+      phone: 电话,
+      part: 公司信息,
+      date: 返京日期,
+      role: 来访角色,
+      memo: 返京交通工具,
+      token: 口令
+    }
+    返回： res.result{rtc:0, msg:'msg'}
+     rtc：0 注册成功， 1 已存在该用户  2口令错误
+     msg: 对rtc的描述

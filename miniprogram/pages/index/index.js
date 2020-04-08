@@ -3,9 +3,12 @@ const app = getApp()
 
 Page({
   data: {
-    avatarUrl: './user-unlogin.png',
-    takeSession: false,
-    requestResult: ''
+    signin: false,
+    logged: false,
+    userInfo: '',
+    openid: '',
+    unionid: '',
+    health: ''
   },
 
   onLoad: function() {
@@ -17,62 +20,30 @@ Page({
     }
 
     //获取用户注册信息
-    // 调用云函数
     wx.cloud.callFunction({
       name: 'login',
       data: {},
       success: res => {
-        console.log('[云函数] [login] user openid: ', res)
-        app.globalData.userid = res.result.data1
-        app.globalData.userinfo = res.result.data2
-        console.log('查询用户信息', res)
-        if (res.result.data1.length == 0){
+        console.log('[云函数] [login] : ', res)
+        if (res.result.userInfo.length == 0){
           app.globalData.logged = false
           console.log('没有查找到用户信息，跳转到注册页面')
           wx.navigateTo({
             url: '../sign/sign',
         })} 
         else{
-          app.globalData.logged = true
-          app.globalData.baseUser = res.result.data1
-          app.globalData.ttdkUser = res.result.data2
+          this.setData({
+            logged: true,
+            userInfo: res.result.userInfo[0],
+            openid: res.result.openid,
+            unionid: res.result.unionid
+          })
         }  
       },
       fail: err => {
         console.error('[云函数] [login] 调用失败', err)
       }
     })   
-  },
-
-  onGetUserInfo: function(e) {
-    if (!this.data.logged && e.detail.userInfo) {
-      this.setData({
-        logged: true,
-        avatarUrl: e.detail.userInfo.avatarUrl,
-        userInfo: e.detail.userInfo
-      })
-    }
-  },
-
-  onGetOpenid: function() {
-    // 调用云函数
-    wx.cloud.callFunction({
-      name: 'login',
-      data: {},
-      success: res => {
-        console.log('[云函数] [login] user openid: ', res.result.openid)
-        app.globalData.openid = res.result.openid
-        wx.navigateTo({
-          url: '../userConsole/userConsole',
-        })
-      },
-      fail: err => {
-        console.error('[云函数] [login] 调用失败', err)
-        wx.navigateTo({
-          url: '../deployFunctions/deployFunctions',
-        })
-      }
-    })
   },
 
   // 上传图片
@@ -83,28 +54,25 @@ Page({
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
       success: function (res) {
-
         wx.showLoading({
           title: '上传中',
         })
-
         const filePath = res.tempFilePaths[0]
-        
+
         // 上传图片
-        const cloudPath = 'my-image' + filePath.match(/\.[^.]+?$/)[0]
+        let up_date = new Date()
+        const cloudPath = 'ttdk/healthcode-' 
+          + up_date.toLocaleString()
+          + filePath.match(/\.[^.]+?$/)[0]
+
         wx.cloud.uploadFile({
           cloudPath,
           filePath,
           success: res => {
-            console.log('[上传文件] 成功：', res)
-
-            app.globalData.fileID = res.fileID
-            app.globalData.cloudPath = cloudPath
-            app.globalData.imagePath = filePath
-            
-            wx.navigateTo({
-              url: '../storageConsole/storageConsole'
-            })
+            console.log('[上传文件] 成功：', res)  
+            this.setData({
+              health: cloudPath
+            })        
           },
           fail: e => {
             console.error('[上传文件] 失败：', e)
@@ -125,4 +93,30 @@ Page({
     })
   },
 
+  // 签到
+  signOn: function(e){
+    wx.cloud.callFunction({
+      name: 'signin',
+      data: { health: this.data.health},
+      success: res => {
+        console.log('[云函数] [signin] : ', res)
+        if (res.result.rtc == 0) {
+          this.setData({signin: true})
+          wx.showToast({
+            title: 'ok',
+          })
+        }
+        else {
+          wx.showToast({
+            title: 'fail' + res.result.msg,
+          })
+        }
+      },
+      fail: err => {
+        console.error('[云函数] [register] 调用失败', err)
+        wx.showToast({
+          title: 'err ' + err,
+      })}
+    })
+  }
 })

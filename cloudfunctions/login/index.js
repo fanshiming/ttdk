@@ -12,17 +12,13 @@ const db = cloud.database()
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
-  let openid = wxContext.OPENID
-  console.log('openid', wxContext.OPENID)
-  let res = await db.collection('users_ttdk').where({
-    openid: openid
-  }).field({
-    openid: true,
-    unionid: true,
-    sn: true
+  let res = await db.collection('info_users_ttdk').where({
+    openid: wxContext.OPENID
   }).get()
-
-  let res_2 = await db.collection('info_users_ttdk').doc(res.data[0].sn).get()
     
-  return {data1: res.data, data2:res_2.data}   
+  return {
+    openid: wxContext.OPENID,
+    unionid: wxContext.UNIONID,
+    userInfo: res.data
+  }
 }

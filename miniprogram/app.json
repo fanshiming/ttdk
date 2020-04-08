@@ -1,9 +1,7 @@
 {
-  "pages": [
+  "pages": [    
     "pages/index/index",
     "pages/sign/sign",
-    
-    
     "pages/chooseLib/chooseLib"
   ],
   "window": {
