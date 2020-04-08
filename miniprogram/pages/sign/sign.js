@@ -38,7 +38,7 @@ Page({
     })
   },
 
-  bindPickerChange: function (e) {
+  bindRolePickerChange: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       laiwang_index: e.detail.value
@@ -69,10 +69,15 @@ Page({
       success: res => {
         console.log('[云函数] [register] : ', res)  
         if (res.result.rtc==0){
-        wx.showModal({
+          wx.showModal({
           title: 'OK',
-          content: '注册成功'})}
-          else{
+          content: '注册成功'
+          })
+          wx.navigateTo({
+            url: '../index/index',
+        })
+        }
+        else{
           wx.showModal({
             title: 'FAIL',
             content: '注册失败'+res.result.msg

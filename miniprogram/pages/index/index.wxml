@@ -3,5 +3,5 @@
 </view>
 
 <view class="setction item">
-<button bindtap="signOn"> 2 签到 </button>
+<button bindtap="signOn" disabled="{{signin}}"> 2 签到 </button>
 </view>

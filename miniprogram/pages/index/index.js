@@ -48,6 +48,7 @@ Page({
 
   // 上传图片
   doUpload: function () {
+    let that = this
     // 选择图片
     wx.chooseImage({
       count: 1,
@@ -58,19 +59,32 @@ Page({
           title: '上传中',
         })
         const filePath = res.tempFilePaths[0]
-
+        
+         //取系统当前日期 作为打卡日期
+        let date = new Date()
+        let the_y = date.getFullYear();
+        let the_m = date.getMonth() + 1;//获取当前月份的日期 
+        let the_d = date.getDate();
+        if (the_m < 10) {
+          the_m = '0' + the_m;
+        };
+        if (the_d < 10) {
+          the_d = '0' + the_d;
+        };
+        let the_date = the_y + "-" + the_m + "-" + the_d
+        
         // 上传图片
-        let up_date = new Date()
         const cloudPath = 'ttdk/healthcode-' 
-          + up_date.toLocaleString()
+          + that.data.name
+          + the_date
           + filePath.match(/\.[^.]+?$/)[0]
-
+        
         wx.cloud.uploadFile({
           cloudPath,
           filePath,
           success: res => {
             console.log('[上传文件] 成功：', res)  
-            this.setData({
+            that.setData({
               health: cloudPath
             })        
           },
@@ -95,13 +109,21 @@ Page({
 
   // 签到
   signOn: function(e){
+    if (this.data.health == ''){
+      wx.showToast({
+        icon: 'none',
+        title: '签到失败，请确认已选择今日健康码',
+      })
+      return
+    }
+    let that = this
     wx.cloud.callFunction({
       name: 'signin',
-      data: { health: this.data.health},
+      data: { health: that.data.health},
       success: res => {
         console.log('[云函数] [signin] : ', res)
         if (res.result.rtc == 0) {
-          this.setData({signin: true})
+          that.setData({signin: true})
           wx.showToast({
             title: 'ok',
           })

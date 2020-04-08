@@ -27,7 +27,7 @@
 </view>
 
 <view class="setction item">
-  <picker bindchange="bindPickerChange" value="{{laiwang_index}}" range="{{laiwang}}">
+  <picker bindchange="bindRolePickerChange" value="{{laiwang_index}}" range="{{laiwang}}">
     <view class="picker">
       组：{{laiwang[laiwang_index]}}
     </view>
