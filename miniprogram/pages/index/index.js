@@ -75,7 +75,7 @@ Page({
         
         // 上传图片
         const cloudPath = 'ttdk/healthcode-' 
-          + that.data.name
+          + that.data.userInfo.sn + '-'
           + the_date
           + filePath.match(/\.[^.]+?$/)[0]
         
