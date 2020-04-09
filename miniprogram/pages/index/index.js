@@ -6,9 +6,82 @@ Page({
     signin: false,
     logged: false,
     userInfo: '',
+    signBook: '',
     openid: '',
     unionid: '',
-    health: ''
+    health: '',
+    demo6_days_style: ''
+  },
+
+  //字符串转日期  '2020-01-22' -> 2020.1.22
+  stringToDate: function (dateStr, separator) {
+    if (!separator) {
+      separator = "-";
+    }
+    var dateArr = dateStr.split(separator);
+    var year = parseInt(dateArr[0]);
+    var month;
+    //处理月份为04这样的情况                         
+    if (dateArr[1].indexOf("0") == 0) {
+      month = parseInt(dateArr[1].substring(1));
+    } else {
+      month = parseInt(dateArr[1]);
+    }
+    var day = parseInt(dateArr[2]);
+    var date = new Date(year, month - 1, day);
+    return date;
+  },
+
+  // 日期转字符串 2020.1.1 -> '2020-01-01'
+  dateToString: function (date) {
+    var year = date.getFullYear();
+    var month = (date.getMonth() + 1).toString();
+    var day = (date.getDate()).toString();
+    if (month.length == 1) {
+      month = "0" + month;
+    }
+    if (day.length == 1) {
+      day = "0" + day;
+    }
+    var dateTime = year + "-" + month + "-" + day;
+    return dateTime;
+  },
+
+  dateChange: function(event){
+    this.signBookShow(event.currentYear, event.currentMonth)
+  },
+  next: function(event){
+    this.signBookShow(event.currentYear, event.currentMonth)
+  },
+  prev: function(event){
+    this.signBookShow(event.currentYear, event.currentMonth)
+  },
+
+  //设置日历打卡信息
+  signBookShow: function(year, month){
+    let demo6_days_style = [];
+    for (let i = 0; i < this.data.signBook.length; i++){
+      let the_date = this.data.signBook[i].date
+      console.log('传入的month', year, month)
+      console.log('逻辑判读的', the_date.getFullYear(), the_date.getMonth())
+      if (the_date.getFullYear() != year || the_date.getMonth() != month){
+        continue;
+      }
+
+      if (the_date.getDate() == 3){
+        demo6_days_style.push({ 
+          month: 'current', day: the_date.getDate(), color: 'white', background: '#f5a8f0'})
+      } else if (the_date.getDate() == 13) {
+        demo6_days_style.push({ 
+          month: 'current', day: the_date.getDate(), color: 'white', background: '#3c5281'})
+      } else {
+        demo6_days_style.push({ 
+          month: 'current', day: the_date.getDate(), color: 'white', background: '#84e7d0' })
+      }
+    }
+    this.setData({
+      demo6_days_style: demo6_days_style
+    })
   },
 
   onLoad: function() {
@@ -38,6 +111,16 @@ Page({
             openid: res.result.openid,
             unionid: res.result.unionid
           })
+        
+          let signBook = []
+          for (let i = 0; i < res.result.signBook.length; i++){
+            signBook.push({
+              date: this.stringToDate(res.result.signBook[i].date, '-'), 
+              health: res.result.signBook[i].health})
+          }
+          this.setData({signBook: signBook})
+          let the_temp_date = new Date()
+          this.signBookShow(the_temp_date.getFullYear(), the_temp_date.getMonth())
         }  
       },
       fail: err => {
@@ -99,7 +182,6 @@ Page({
             wx.hideLoading()
           }
         })
-
       },
       fail: e => {
         console.error(e)

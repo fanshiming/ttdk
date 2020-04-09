@@ -12,13 +12,22 @@ const db = cloud.database()
 // 云函数入口函数
 exports.main = async (event, context) => {
   const wxContext = cloud.getWXContext()
+  // 查询用户注册信息
   let res = await db.collection('info_users_ttdk').where({
     openid: wxContext.OPENID
   }).get()
+  // 查询打卡信息
+  var res2 = ''
+  if (res.data.length>0){
+    res2 = await db.collection('books_ttdk').where({sn: res.data[0].sn})
+    .field({date: true, health: true})
+    .get()
+  }
     
   return {
     openid: wxContext.OPENID,
     unionid: wxContext.UNIONID,
-    userInfo: res.data
+    userInfo: res.data,
+    signBook: res2.data
   }
 }

@@ -1,3 +1,12 @@
+签到日期样式
+colors: '14 #3c5281  4 #f5a8f0  other #84e7d0',
+  
+  lizi demo6_days_style: [{ month: 'current', day: 2, color: 'white', background: '#84e7d0'},
+      { month: 'current', day: 7, color: 'white', background: '#3c5281' },
+      { month: 'current', day: 12, color: 'white', background: '#f5a8f0' },
+    ]
+
+
 建立用户体系
    info_users_ttdk
 

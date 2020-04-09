@@ -1,7 +1,28 @@
-<view class="setction item">
-<button bindtap="doUpload"> 1 选择今日健康码 </button>
+<view>
+  <view class="setction item">
+    <button bindtap="doUpload"> 1 选择今日健康码 </button>
+  </view>
+
+  <view class="setction item">
+    <button bindtap="signOn" disabled="{{signin}}"> 2 签到 </button>
+  </view>
 </view>
 
-<view class="setction item">
-<button bindtap="signOn" disabled="{{signin}}"> 2 签到 </button>
+<view>
+  <text class="title">打卡日历</text>
+  <view class="demo6">
+    <calendar 
+    binddateChange="dateChange"
+    bindnextMonth="next"
+    bindprevMonth="prev"     
+    weeks-type="cn"  
+    cell-size="30" 
+    next="{{true}}" prev="{{true}}" show-more-days="{{false}}"
+    calendar-style="demo6-calendar" 
+    header-style="demo6-header" 
+    board-style="demo6-board" 
+    days-color="{{demo6_days_style}}" 
+    active-type = "rounded"
+    />
+  </view>
 </view>
