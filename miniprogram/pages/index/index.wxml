@@ -1,15 +1,11 @@
 <view>
   <view class="setction item">
-    <button bindtap="doUpload" disabled="{{signin}}"> 1 选择今日健康码 </button>
-  </view>
-
-  <view class="setction item">
-    <button bindtap="signOn" disabled="{{signin}}"> 2 签到 </button>
+    <button bindtap="signOn2" disabled="{{signin}}">  上传今日健康码 </button>
   </view>
 </view>
 
 <view>
-  <text class="title">打卡日历</text>
+  <text class="title">健康码日历</text>
   <view class="demo6">
     <calendar 
     binddateChange="next"

@@ -213,7 +213,7 @@ Page({
     if (this.data.healthcode_fileid == ''){
       wx.showToast({
         icon: 'none',
-        title: '签到失败，请确认已选择今日健康码',
+        title: '签到失败，请确认已上传今日健康码',
       })
       return
     }
@@ -249,5 +249,86 @@ Page({
           title: 'err ' + err,
       })}
     })
-  }
+  },
+
+  // 签到 集合了上传健康码功能
+  signOn2: function (e) {
+    let that = this
+    // 选择健康码并上传
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['compressed'],
+      sourceType: ['album', 'camera'],
+      success: function (res) {
+        wx.showLoading({
+          title: '上传中',
+        })
+        const filePath = res.tempFilePaths[0]
+
+        //取系统当前日期 作为打卡日期
+        let the_date = that.dateToString(new Date())
+
+        // 上传图片
+        const cloudPath = 'ttdk/healthcode-'
+          + that.data.userInfo.sn + '-'
+          + the_date
+          + filePath.match(/\.[^.]+?$/)[0]
+
+        // 将图片上传至云存储空间
+        wx.cloud.uploadFile({
+          // 指定上传到的云路径
+          cloudPath: cloudPath,
+          filePath: filePath,
+          // 成功回调
+          success: res => {
+            that.setData({
+              healthcode_fileid: res.fileID
+            })     
+            // 调用云函数签到
+            wx.cloud.callFunction({
+              name: 'signin',
+              data: { health: that.data.healthcode_fileid },
+              success: res => {
+                console.log('[云函数] [signin] : ', res)
+                if (res.result.rtc == 0) {
+                  let c_date = new Date()
+                  that.setData({
+                    signin: true
+                  })
+                  that.data.signBook.push({
+                    health: that.data.healthcode_fileid,
+                    date: c_date
+                  })
+                  that.signBookShow(c_date.getFullYear(), c_date.getMonth() + 1)
+                  wx.showToast({
+                    title: 'ok',
+                  })
+                }
+                else {
+                  wx.showToast({
+                    title: '签到失败: ' + res.result.msg,
+                  })
+                }
+              },
+              fail: err => {
+                console.error('[云函数] [register] 调用失败', err)
+                wx.showToast({
+                  title: 'err ' + err,
+                })
+              }
+            })
+          },
+          fail: e => {
+            console.error('[上传健康码] 失败：', e)
+            wx.showToast({
+              icon: 'none',
+              title: '上传健康码失败',
+            })
+          },
+          complete:() =>{},
+        })      
+      complete: () => {
+        wx.hideLoading()
+      }}})
+  },
 })
