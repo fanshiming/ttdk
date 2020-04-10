@@ -54,6 +54,10 @@ Page({
   },
   //点击显示健康码
   dayClick: function (event) {
+    /** 不显示
+    this.setData({
+      health_fix: ''
+    })
     let file_id = '';
     for (let i = 0; i < this.data.signBook.length; i++){
       let the_date = this.data.signBook[i].date
@@ -61,13 +65,13 @@ Page({
         event.detail.month == (the_date.getMonth()+1) &&
         event.detail.day == the_date.getDate()
       ){
-        console.log('比对ok')
         this.setData({
           health_fix: this.data.signBook[i].healthcode_fileid
         })
         break;
       }
     }
+    */
   },
 
   //设置日历打卡信息  month=1时 date().month=0
@@ -206,7 +210,7 @@ Page({
 
   // 签到
   signOn: function(e){
-    if (this.data.health == ''){
+    if (this.data.healthcode_fileid == ''){
       wx.showToast({
         icon: 'none',
         title: '签到失败，请确认已选择今日健康码',
