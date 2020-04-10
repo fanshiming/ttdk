@@ -9,8 +9,10 @@ Page({
     signBook: '',
     openid: '',
     unionid: '',
-    health: '',
-    demo6_days_style: ''
+    healthcode_fileid: '',
+    demo6_days_style: '',
+
+    health_fix: ''
   },
 
   //字符串转日期  '2020-01-22' -> 2020.1.22
@@ -47,24 +49,33 @@ Page({
     return dateTime;
   },
 
-  dateChange: function(event){
-    this.signBookShow(event.currentYear, event.currentMonth)
-  },
   next: function(event){
-    this.signBookShow(event.currentYear, event.currentMonth)
+    this.signBookShow(event.detail.currentYear, event.detail.currentMonth)
   },
-  prev: function(event){
-    this.signBookShow(event.currentYear, event.currentMonth)
+  //点击显示健康码
+  dayClick: function (event) {
+    let file_id = '';
+    for (let i = 0; i < this.data.signBook.length; i++){
+      let the_date = this.data.signBook[i].date
+      if (event.detail.year == the_date.getFullYear() &&
+        event.detail.month == (the_date.getMonth()+1) &&
+        event.detail.day == the_date.getDate()
+      ){
+        console.log('比对ok')
+        this.setData({
+          health_fix: this.data.signBook[i].healthcode_fileid
+        })
+        break;
+      }
+    }
   },
 
-  //设置日历打卡信息
+  //设置日历打卡信息  month=1时 date().month=0
   signBookShow: function(year, month){
     let demo6_days_style = [];
     for (let i = 0; i < this.data.signBook.length; i++){
-      let the_date = this.data.signBook[i].date
-      console.log('传入的month', year, month)
-      console.log('逻辑判读的', the_date.getFullYear(), the_date.getMonth())
-      if (the_date.getFullYear() != year || the_date.getMonth() != month){
+      let the_date = this.data.signBook[i].date      
+      if (the_date.getFullYear() != year || (the_date.getMonth()+1) != month){
         continue;
       }
 
@@ -97,7 +108,6 @@ Page({
       name: 'login',
       data: {},
       success: res => {
-        console.log('[云函数] [login] : ', res)
         if (res.result.userInfo.length == 0){
           app.globalData.logged = false
           console.log('没有查找到用户信息，跳转到注册页面')
@@ -116,11 +126,26 @@ Page({
           for (let i = 0; i < res.result.signBook.length; i++){
             signBook.push({
               date: this.stringToDate(res.result.signBook[i].date, '-'), 
-              health: res.result.signBook[i].health})
+              healthcode_fileid: res.result.signBook[i].health})
           }
+
+          let current_date = new Date()          
+          for (let i = 0; i < signBook.length; i++){
+            let year = signBook[i].date.getFullYear()
+            let month = signBook[i].date.getMonth()
+            let day = signBook[i].date.getDate()
+            if (year == current_date.getFullYear() &&
+            month == current_date.getMonth() &&
+            day == current_date.getDate()
+            ){
+              this.setData({ signin: true })
+              break;
+            }
+          }
+
           this.setData({signBook: signBook})
           let the_temp_date = new Date()
-          this.signBookShow(the_temp_date.getFullYear(), the_temp_date.getMonth())
+          this.signBookShow(the_temp_date.getFullYear(), the_temp_date.getMonth()+1)
         }  
       },
       fail: err => {
@@ -144,18 +169,8 @@ Page({
         const filePath = res.tempFilePaths[0]
         
          //取系统当前日期 作为打卡日期
-        let date = new Date()
-        let the_y = date.getFullYear();
-        let the_m = date.getMonth() + 1;//获取当前月份的日期 
-        let the_d = date.getDate();
-        if (the_m < 10) {
-          the_m = '0' + the_m;
-        };
-        if (the_d < 10) {
-          the_d = '0' + the_d;
-        };
-        let the_date = the_y + "-" + the_m + "-" + the_d
-        
+        let the_date = that.dateToString(new Date())
+                
         // 上传图片
         const cloudPath = 'ttdk/healthcode-' 
           + that.data.userInfo.sn + '-'
@@ -168,7 +183,7 @@ Page({
           success: res => {
             console.log('[上传文件] 成功：', res)  
             that.setData({
-              health: cloudPath
+              healthcode_fileid: res.fileID
             })        
           },
           fail: e => {
@@ -201,11 +216,19 @@ Page({
     let that = this
     wx.cloud.callFunction({
       name: 'signin',
-      data: { health: that.data.health},
+      data: { health: that.data.healthcode_fileid},
       success: res => {
         console.log('[云函数] [signin] : ', res)
         if (res.result.rtc == 0) {
-          that.setData({signin: true})
+          let c_date = new Date()
+          that.setData({
+            signin: true
+            })
+          that.data.signBook.push({
+            health: that.data.healthcode_fileid,
+            date: c_date
+          })
+            that.signBookShow(c_date.getFullYear(), c_date.getMonth()+1)
           wx.showToast({
             title: 'ok',
           })

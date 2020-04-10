@@ -1,6 +1,6 @@
 <view>
   <view class="setction item">
-    <button bindtap="doUpload"> 1 选择今日健康码 </button>
+    <button bindtap="doUpload" disabled="{{signin}}"> 1 选择今日健康码 </button>
   </view>
 
   <view class="setction item">
@@ -12,9 +12,10 @@
   <text class="title">打卡日历</text>
   <view class="demo6">
     <calendar 
-    binddateChange="dateChange"
+    binddateChange="next"
     bindnextMonth="next"
-    bindprevMonth="prev"     
+    bindprevMonth="next"    
+    binddayClick="dayClick" 
     weeks-type="cn"  
     cell-size="30" 
     next="{{true}}" prev="{{true}}" show-more-days="{{false}}"
@@ -26,3 +27,8 @@
     />
   </view>
 </view>
+
+  <view class="page__bd">
+    <image style="background-color: #eeeeee;" 
+      mode="aspectFit" src="{{health_fix}}"></image>
+  </view>

@@ -8,7 +8,7 @@
     "backgroundColor": "#F6F6F6",
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
-    "navigationBarTitleText": "访客 book",
+    "navigationBarTitleText": "甲9 book",
     "navigationBarTextStyle": "black"
   },
   "plugins": {
@@ -17,6 +17,7 @@
       "provider": "wx92c68dae5a8bb046"
     }
   },
+ 
   "sitemapLocation": "sitemap.json",
   "style": "v2"
 }
