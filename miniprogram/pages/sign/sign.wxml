@@ -1,9 +1,10 @@
+<view class="guide">
 <view class="setction item">
-姓名：<input placeholder="大名"></input>
+姓名：<input placeholder="大名" value="{{name}}" bindinput="getInputName" />
 </view>
 
 <view class="setction item">
-健康码：<input placeholder="上传"></input>
+手机：<input placeholder="12345678901" value="{{phone}}" bindinput="getInputPhone" />
 </view>
 
 <view class="setction item">
@@ -14,23 +15,37 @@
   </picker>
 </view>
 
-<view class="setction item">
-组织名称：<input placeholder="公司"></input>
-</view>
-
-<view class="setction item">
-  <picker bindchange="bindPickerChange" value="{{laiwang_index}}" range="{{laiwang}}">
+<view class="section item">
+  <picker bindchange="bindBirdPickerChange" value="{{bird_index}}" range="{{bird}}">
     <view class="picker">
-      访客事由：{{laiwang[laiwang_index]}}
+      返京方式：{{bird[bird_index]}}
     </view>
   </picker>
 </view>
 
 <view class="setction item">
-口令：<input placeholder="联系人索取口令"></input>
+组织名称：<input placeholder="公司" value="{{part}}" bindinput="getInputPart" />
+</view>
+
+<view class="setction item">
+  <picker bindchange="bindRolePickerChange" value="{{laiwang_index}}" range="{{laiwang}}">
+    <view class="picker">
+      组：{{laiwang[laiwang_index]}}
+    </view>
+  </picker>
+</view>
+
+<view class="setction item">
+口令：<input placeholder="联系人索取口令" value="{{token}}" bindinput="getInputToken" />
+</view>
 </view>
 
 <view>
-<button>签到</button>
+<button type="primary" bindtap="submit">提交</button>
 </view>
 
+ <view class="guide">
+    <text class="headline">示例介绍</text>
+    <text class="p">1. 返京日期：如果2020年未离京，默认2019-12-31</text>
+    <text class="p">2. 组：如果您是ETC相关设备商，选择配合测试；首发非速通公司员工，选择借调；外协单位，选择外协</text>
+  </view>
