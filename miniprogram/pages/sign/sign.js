@@ -53,6 +53,18 @@ Page({
   },
 
   submit: function(e){
+    if (this.data.name == '' || this.data.phone == '' || this.data.part == '' ||
+    this.data.token == ''){
+      wx.showModal({
+        title: '',  
+        content: '有未填写的信息，比如姓名 手机号 组织名称 口令等',  
+        confirmText: '我知道了', 
+        confirmColor: '',
+        showCancel: false, 
+      })
+      return
+    }
+
     let f_data = {
       name: this.data.name,
       phone: this.data.phone,
@@ -79,8 +91,8 @@ Page({
         }
         else{
           wx.showModal({
-            title: 'FAIL',
-            content: '注册失败'+res.result.msg
+            title: '注册失败',
+            content: res.result.msg
         })}},
       fail: err => {
         console.error('[云函数] [register] 调用失败', err)

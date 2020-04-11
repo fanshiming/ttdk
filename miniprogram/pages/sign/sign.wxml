@@ -1,3 +1,4 @@
+<view class="guide">
 <view class="setction item">
 姓名：<input placeholder="大名" value="{{name}}" bindinput="getInputName" />
 </view>
@@ -37,8 +38,14 @@
 <view class="setction item">
 口令：<input placeholder="联系人索取口令" value="{{token}}" bindinput="getInputToken" />
 </view>
-
-<view>
-<button bindtap="submit">提交</button>
 </view>
 
+<view>
+<button type="primary" bindtap="submit">提交</button>
+</view>
+
+ <view class="guide">
+    <text class="headline">示例介绍</text>
+    <text class="p">1. 返京日期：如果2020年未离京，默认2019-12-31</text>
+    <text class="p">2. 组：如果您是ETC相关设备商，选择配合测试；首发非速通公司员工，选择借调；外协单位，选择外协</text>
+  </view>

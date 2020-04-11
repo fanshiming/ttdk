@@ -1,6 +1,6 @@
 <view>
   <view class="setction item">
-    <button bindtap="signOn2" disabled="{{signin}}">  上传今日健康码 </button>
+    <button bindtap="signOn2" disabled="{{signin || !logged}}">  上传今日健康码 </button>
   </view>
 </view>
 
