@@ -1,0 +1,39 @@
+<view class="page-wrapper ">
+  <view class="calendar-bar-wrapper js_calendar_wrapper">
+    <view class="bus-tabs calendar-bar">
+      <view class="tabs-item js_pre_day">前一天</view>
+      <view class="tabs-item js_show_calendar">{{date_current}}</view>
+      <view class="tabs-item js_next_day">后一天</view>
+    </view>
+  </view>
+  <view class="bus-list js_bus_list ">
+
+    <block wx:for="{{ttdk_current}}" wx:key="k">
+      <view class="bus-list-item  ">
+        <view class="bus-time">{{item.name}}</view>
+        <view class="tobooking"> 健康码 </view>
+        <view class="detail">
+          <view class="detail1">
+            <view class="start">
+              <text class="icon-circle s-icon1"></text>{{item.part}}</view>
+            <view class="end">
+              <text class="icon-circle s-icon2"></text>返京日期: ******</view>
+          </view>
+          <view class="tags">
+            <view>
+              <text class="price">{{item.gender}}</text>
+            </view>
+            <view>
+              <text class="countleft">{{item.area}}</text>
+            </view>
+            <view>
+              <text class="b-tags js_tags"></text>
+            </view>
+          </view>
+        </view>
+      </view>
+
+    </block>
+  </view>
+
+</view>
