@@ -10,7 +10,8 @@ Page({
     books_ttdk_Set: '',
 
     date_current: '',    
-    ttdk_current: ''
+    ttdk_current: '',
+    total_people: 0
   },
 
   //字符串转日期  '2020-01-22' -> 2020.1.22
@@ -85,7 +86,9 @@ Page({
           this.data.books_ttdk_Set.add(item.date)
         }
      
-        this.setData({ ttdk_current: this.data.books_ttdk[this.data.date_current]})
+        this.setData({ ttdk_current: this.data.books_ttdk[this.data.date_current]
+        })
+
       },
       fail: res => {
         wx.showModal({

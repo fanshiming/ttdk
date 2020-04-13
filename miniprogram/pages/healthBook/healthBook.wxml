@@ -1,7 +1,6 @@
 <view class="page-wrapper ">
   
-  <scroll-view scroll-y="true" class="bus-list js_bus_list ">
-
+  <scroll-view scroll-y="true" class="bus-list ">
     <block wx:for="{{ttdk_current}}" wx:key="k">
       <view class="bus-list-item">
         <view class="bus-time">{{item.name}}</view>
@@ -30,15 +29,15 @@
     </block>
   </scroll-view>
 
-<view class="calendar-bar-wrapper js_calendar_wrapper" >
+<view class="calendar-bar-wrapper" >
     <view class="bus-tabs calendar-bar">
-      <view class="tabs-item js_pre_day" bindtap="prev">前一天</view>
-      <view class="setction item tabs-item js_show_calendar">
+      <view class="tabs-item" bindtap="prev">前一天</view>
+      <view class="setction item tabs-item">
         <picker mode="date" value="{{date}}" start="2019-12-31" end="2020-09-01" bindchange="bindDateChange">
-          <view class="picker">{{date_current}}</view>
+          <view class="picker">{{date_current}} ({{ttdk_current.length}} 人)</view>
         </picker>
       </view>
-      <view class="tabs-item js_next_day" bindtap="next">后一天</view>
+      <view class="tabs-item" bindtap="next">后一天</view>
     </view>
   </view>
 </view>
