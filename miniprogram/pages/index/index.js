@@ -238,4 +238,11 @@ Page({
         wx.hideLoading()
       }}})
   },
+
+  nav_to_info: function(){
+    wx.navigateTo({
+      url: '../healthBook/healthBook'
+    })
+  }
+
 })

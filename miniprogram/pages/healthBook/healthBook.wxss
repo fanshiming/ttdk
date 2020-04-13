@@ -1,4 +1,4 @@
- 	.page-wrapper {
+.page-wrapper {
 	margin: 0;
 	font-size: 28rpx;
 	line-height: 1.5;
@@ -142,7 +142,7 @@
 	line-height: 72rpx;
 	background-color: #08c563;
 	color: #fff;
-	top: 0;
+	bottom: 0;
 	left: 0;
 	position: fixed;
 	}

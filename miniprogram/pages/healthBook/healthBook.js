@@ -7,9 +7,9 @@ Page({
   data: {
     info_users_ttdk: '',
     books_ttdk: '',
-    date_current: '',
-    listDataSet: '',
-    listData:{},
+    books_ttdk_Set: '',
+
+    date_current: '',    
     ttdk_current: ''
   },
 
@@ -51,7 +51,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.data.listDataSet = new Set()
+    wx.showLoading()
+    this.data.books_ttdk_Set = new Set()
     //取系统当前日期 作为查询初始日期
     this.setData({date_current: this.dateToString(new Date())})
 
@@ -61,6 +62,11 @@ Page({
       data: {},
       success: res => {
         //数据落地到内存
+        this.data.info_users_ttdk = {}
+        for (let i = 0; i < res.result.user.length; i++){
+          this.data.info_users_ttdk[res.result.user[i].sn] = res.result.user[i]
+        }
+
         this.data.books_ttdk = {}
         for (let i = 0; i < res.result.book.length; i++){
           let item = res.result.book[i]
@@ -68,33 +74,18 @@ Page({
         }
         for (let i = 0; i < res.result.book.length; i++) {
           let item = res.result.book[i]
-          this.data.books_ttdk[item.date].push(item)
+          this.data.books_ttdk[item.date].push({
+            name: this.data.info_users_ttdk[item.sn].name,
+            part: this.data.info_users_ttdk[item.sn].part,
+            welcome_date: this.data.info_users_ttdk[item.sn].date,
+            gender: this.data.info_users_ttdk[item.sn].gender,
+            area: this.data.info_users_ttdk[item.sn].area,
+            health: item.health,
+          })
+          this.data.books_ttdk_Set.add(item.date)
         }
-
-        this.data.info_users_ttdk = res.result.user
-        console.log('检查打卡表', res.result.user, res.result.book)
-
-        this.data.listDataSet.clear()
-
-        if (!this.data.listDataSet.has(this.data.date_current)){
-          console.log('开始注入集合')
-          this.data.listData[this.data.date_current] = []
-          for (let i = 0; i < this.data.books_ttdk.length; i++){
-            let item = this.date.books_ttdk[i]
-            if (item.date == this.data.date_current){
-              this.data.listData[this.data.date_current].push({
-                name: this.data.info_users_ttdk[item.sn].name,
-                part: this.data.info_users_ttdk[item.sn].part,
-                fanjing_date: this.data.info_users_ttdk[item.sn].date,
-                gender: this.data.info_users_ttdk[item.sn].gender,
-                area: this.data.info_users_ttdk[item.sn].area,
-                health: item.health,
-              })
-            }
-          }
-          this.data.listDataSet.add(this.data.date_current)
-        }
-        this.setData({ ttdk_current: this.data.listData[this.data.date_current]})
+     
+        this.setData({ ttdk_current: this.data.books_ttdk[this.data.date_current]})
       },
       fail: res => {
         wx.showModal({
@@ -102,11 +93,57 @@ Page({
           title: '',
           content: '本次未能获取健康码数据，请重试小程序或者检查网络',
         })
-      },})
+      },
+      complete: res => {
+        wx.hideLoading()
+      }
+    })
   },
 
-  onDateChange: function(e){
+  update_ttdk_current: function(){
+    if (this.data.books_ttdk_Set.has(this.data.date_current)){
+      this.setData({
+        ttdk_current: this.data.books_ttdk[this.data.date_current]
+      })
+    } else {
+      this.setData({
+        ttdk_current: '',
+      })
+    }
+  },
 
+  bindDateChange: function(e){
+    this.setData({
+      date_current: e.detail.value
+    })
+
+    this.update_ttdk_current()
+  },
+
+  showHealth: function(e) {
+    wx.navigateTo({
+      url: '../showHealth/showHealth',
+      success: function(res) {
+        res.eventChannel.emit('acceptDataFromOpenerPage', { data: {health:e.target.id} })
+      }
+  })
+  },
+
+  prev: function(){
+    let curDate = this.stringToDate(this.data.date_current);
+    let prevDate = new Date(curDate.getTime() - 24*60*60*1000);
+    this.setData({
+      date_current: this.dateToString(prevDate)
+    })
+    this.update_ttdk_current()
+  },
+  next: function(){
+    let curDate = this.stringToDate(this.data.date_current);
+    let nextDate = new Date(curDate.getTime() + 24*60*60*1000);
+    this.setData({
+      date_current: this.dateToString(nextDate)
+    })
+    this.update_ttdk_current()
   },
 
   /**

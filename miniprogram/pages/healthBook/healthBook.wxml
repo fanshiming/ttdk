@@ -1,23 +1,17 @@
 <view class="page-wrapper ">
-  <view class="calendar-bar-wrapper js_calendar_wrapper">
-    <view class="bus-tabs calendar-bar">
-      <view class="tabs-item js_pre_day">前一天</view>
-      <view class="tabs-item js_show_calendar">{{date_current}}</view>
-      <view class="tabs-item js_next_day">后一天</view>
-    </view>
-  </view>
-  <view class="bus-list js_bus_list ">
+  
+  <scroll-view scroll-y="true" class="bus-list js_bus_list ">
 
     <block wx:for="{{ttdk_current}}" wx:key="k">
-      <view class="bus-list-item  ">
+      <view class="bus-list-item">
         <view class="bus-time">{{item.name}}</view>
-        <view class="tobooking"> 健康码 </view>
+        <view class="tobooking" bindtap="showHealth" id="{{item.health}}"> 健康码 </view>
         <view class="detail">
           <view class="detail1">
             <view class="start">
               <text class="icon-circle s-icon1"></text>{{item.part}}</view>
             <view class="end">
-              <text class="icon-circle s-icon2"></text>返京日期: ******</view>
+              <text class="icon-circle s-icon2"></text>返京日期: {{item.welcome_date}}</view>
           </view>
           <view class="tags">
             <view>
@@ -34,6 +28,19 @@
       </view>
 
     </block>
-  </view>
+  </scroll-view>
 
+<view class="calendar-bar-wrapper js_calendar_wrapper" >
+    <view class="bus-tabs calendar-bar">
+      <view class="tabs-item js_pre_day" bindtap="prev">前一天</view>
+      <view class="setction item tabs-item js_show_calendar">
+        <picker mode="date" value="{{date}}" start="2019-12-31" end="2020-09-01" bindchange="bindDateChange">
+          <view class="picker">{{date_current}}</view>
+        </picker>
+      </view>
+      <view class="tabs-item js_next_day" bindtap="next">后一天</view>
+    </view>
+  </view>
 </view>
+
+

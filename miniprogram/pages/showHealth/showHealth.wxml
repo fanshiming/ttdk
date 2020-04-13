@@ -1,0 +1,3 @@
+ <view class="page__bd">
+    <image mode="widthFix" style="width:100%" src="{{health}}" bindload="loaded"></image>
+  </view>

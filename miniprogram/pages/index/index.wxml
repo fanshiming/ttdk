@@ -23,3 +23,9 @@
     />
   </view>
 </view>
+
+  <view class="guide">    
+    <div class="nav">
+      <button class="next" size="mini" type="default" bindtap="nav_to_info">信息披露</button>
+    </div>
+  </view>
