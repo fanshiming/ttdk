@@ -1,6 +1,6 @@
 <view>
   <view class="setction item">
-    <button bindtap="signOn2" disabled="{{signin || !logged}}">  上传今日健康码 </button>
+    <button bindtap="signOn2" disabled="{{signin || !logged}}" type="primary">  登记今日健康码 </button>
   </view>
 </view>
 
@@ -24,7 +24,8 @@
   </view>
 </view>
 
-  <view class="page__bd">
-    <image style="background-color: #eeeeee;" 
-      mode="aspectFit" src="{{health_fix}}"></image>
+  <view class="guide">    
+    <div class="nav">
+      <button class="next" size="mini" type="default" bindtap="nav_to_info">信息披露</button>
+    </div>
   </view>

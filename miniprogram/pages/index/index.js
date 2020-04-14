@@ -83,10 +83,10 @@ Page({
         continue;
       }
 
-      if (the_date.getDate() == 3){
+      if (the_date.getDate() == 4){
         demo6_days_style.push({ 
           month: 'current', day: the_date.getDate(), color: 'white', background: '#f5a8f0'})
-      } else if (the_date.getDate() == 13) {
+      } else if (the_date.getDate() == 14) {
         demo6_days_style.push({ 
           month: 'current', day: the_date.getDate(), color: 'white', background: '#3c5281'})
       } else {
@@ -156,99 +156,6 @@ Page({
         console.error('[云函数] [login] 调用失败', err)
       }
     })   
-  },
-
-  // 上传图片
-  doUpload: function () {
-    let that = this
-    // 选择图片
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['compressed'],
-      sourceType: ['album', 'camera'],
-      success: function (res) {
-        wx.showLoading({
-          title: '上传中',
-        })
-        const filePath = res.tempFilePaths[0]
-        
-         //取系统当前日期 作为打卡日期
-        let the_date = that.dateToString(new Date())
-                
-        // 上传图片
-        const cloudPath = 'ttdk/healthcode-' 
-          + that.data.userInfo.sn + '-'
-          + the_date
-          + filePath.match(/\.[^.]+?$/)[0]
-        
-        wx.cloud.uploadFile({
-          cloudPath,
-          filePath,
-          success: res => {
-            console.log('[上传文件] 成功：', res)  
-            that.setData({
-              healthcode_fileid: res.fileID
-            })        
-          },
-          fail: e => {
-            console.error('[上传文件] 失败：', e)
-            wx.showToast({
-              icon: 'none',
-              title: '上传失败',
-            })
-          },
-          complete: () => {
-            wx.hideLoading()
-          }
-        })
-      },
-      fail: e => {
-        console.error(e)
-      }
-    })
-  },
-
-  // 签到
-  signOn: function(e){
-    if (this.data.healthcode_fileid == ''){
-      wx.showToast({
-        icon: 'none',
-        title: '签到失败，请确认已上传今日健康码',
-      })
-      return
-    }
-    let that = this
-    wx.cloud.callFunction({
-      name: 'signin',
-      data: { health: that.data.healthcode_fileid},
-      success: res => {
-        console.log('[云函数] [signin] : ', res)
-        if (res.result.rtc == 0) {
-          let c_date = new Date()
-          that.setData({
-            signin: true
-            })
-          that.data.signBook.push({
-            health: that.data.healthcode_fileid,
-            date: c_date
-          })
-            that.signBookShow(c_date.getFullYear(), c_date.getMonth()+1)
-          wx.showToast({
-            title: 'ok',
-          })
-        }
-        else {
-          wx.showToast({
-            title: 'fail' + res.result.msg,
-          })
-        }
-      },
-      fail: err => {
-        console.error('[云函数] [register] 调用失败', err)
-        wx.showToast({
-          title: 'err ' + err,
-      })}
-    })
   },
 
   // 签到 集合了上传健康码功能
@@ -331,4 +238,11 @@ Page({
         wx.hideLoading()
       }}})
   },
+
+  nav_to_info: function(){
+    wx.navigateTo({
+      url: '../healthBook/healthBook'
+    })
+  }
+
 })
