@@ -46,6 +46,8 @@ exports.main = async (event, context) => {
     openid: wxContext.OPENID,
     unionid: wxContext.UNIONID,
     name: event.name,
+    gender: event.gender,
+    area: event.area,
     phone: event.phone,
     part: event.part,
     memo: event.memo,

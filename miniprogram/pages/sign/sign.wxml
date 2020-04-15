@@ -3,8 +3,24 @@
 姓名：<input placeholder="大名" value="{{name}}" bindinput="getInputName" />
 </view>
 
+<view class="section item">
+  <picker bindchange="bindGenderPickerChange" value="{{gender_index}}" range="{{gender}}">
+    <view class="picker">
+      性别：{{gender[gender_index]}}
+    </view>
+  </picker>
+</view>
+
 <view class="setction item">
 手机：<input placeholder="12345678901" value="{{phone}}" bindinput="getInputPhone" />
+</view>
+
+<view class="section item">
+  <picker bindchange="bindAreaPickerChange" value="{{area_index}}" range="{{area}}">
+    <view class="picker">
+      常住区域：{{area[area_index]}}
+    </view>
+  </picker>
 </view>
 
 <view class="setction item">
