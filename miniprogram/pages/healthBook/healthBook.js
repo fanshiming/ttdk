@@ -5,13 +5,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    info_users_ttdk: '',
-    books_ttdk: '',
-    books_ttdk_Set: '',
+    info_users_ttdk: '',  // 用户注册基本信息，已sn作为主键，注册信息{}作为value
+    books_ttdk: '',       // 用户上传健康码信息，已日期作为主键，所有人的打卡信息[]作为value
+    books_ttdk_Set: '',   // 因为{}没有Key in 功能，所以单独设置一个集合，判断 books_ttdk是否存在某主键
 
-    date_current: '',    
-    ttdk_current: '',
-    total_people: 0
+    date_current: '',     // 当前要展示打卡信息的日期
+    ttdk_current: ''     // 当前要展示的打卡信息[]     
   },
 
   //字符串转日期  '2020-01-22' -> 2020.1.22
