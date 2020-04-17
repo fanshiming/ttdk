@@ -99,6 +99,19 @@ Page({
     })
   },
 
+  mail: function() {
+    //获取用户注册信息
+    wx.cloud.callFunction({
+      name: 'fk_ttdk_oocData',
+      data: {},
+      success: res => {
+        console.log('调用成功', res)
+      },
+      fail: e => { console.log('调用失败', e)},
+      complete: ()=>{}
+    })
+  },
+
   onLoad: function() {
     if (!wx.cloud) {
       wx.redirectTo({

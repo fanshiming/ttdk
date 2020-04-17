@@ -1,5 +1,4 @@
 <view class="page-wrapper ">
-  
   <scroll-view scroll-y="true" class="bus-list ">
     <block wx:for="{{ttdk_current}}" wx:key="k">
       <view class="bus-list-item">

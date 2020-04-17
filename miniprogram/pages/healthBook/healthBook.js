@@ -101,7 +101,7 @@ Page({
       }
     })
   },
-
+  
   update_ttdk_current: function(){
     if (this.data.books_ttdk_Set.has(this.data.date_current)){
       this.setData({
