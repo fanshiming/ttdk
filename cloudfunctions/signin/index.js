@@ -48,9 +48,14 @@ exports.main = async (event, context) => {
   }
 
   //组织打卡数据
+  let myHealthUrl = await cloud.getTempFileURL({
+    fileList: [event.health],
+  })
+
   let f_data = {
     date: the_date,
     health: event.health,
+    healthUrl: myHealthUrl.fileList[0].tempFileURL,
     sn: user_base_info.sn
   }
 
@@ -58,6 +63,5 @@ exports.main = async (event, context) => {
     // data 字段表示需新增的 JSON 数据
     data: f_data
   })
-  console.log('新增打卡数据', res2)
   return { rtc: 0, msg: 'ok' }
 }

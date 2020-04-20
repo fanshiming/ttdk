@@ -29,7 +29,3 @@
       <button class="next" size="mini" type="default" bindtap="nav_to_info">信息披露</button>
     </div>
   </view>
-
-  <view>
-  <button bindtap="mail"> click </button>
-  </view>

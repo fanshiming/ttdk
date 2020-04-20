@@ -1,5 +1,5 @@
 // 云函数入口文件
-const cloud = require('wx-server-sdk')
+const cloud = require('wx-server-sdk');
 const xlsx = require('node-xlsx');
 
 cloud.init({
@@ -30,8 +30,6 @@ exports.main = async (event, context) => {
       errMsg: acc.errMsg,
     }})
   
-  console.log('打卡', books_ttdk)
-
   // 先取出集合记录总数
   const countResult2 = await db.collection('info_users_ttdk').count()
   const total2 = countResult2.total
@@ -50,20 +48,36 @@ exports.main = async (event, context) => {
       errMsg: acc.errMsg,
     }
   })
-  console.log('注册细腻', info_users_ttdk)
   let users_info = {} //以sn作为主键，注册信息{}作为value
   for (let i = 0; i < info_users_ttdk.data.length; i++) {
     users_info[info_users_ttdk.data[i].sn] = info_users_ttdk.data[i]
   }
-  console.log('注册信息', users_info)
+  let regist_data = [];
+  let register_row = ['area', 'date', 'gender', 'memo', 'name', 'part', 'phone', 'role', 'sn'];
+  regist_data.push(register_row);
+  for (let i = 0; i < info_users_ttdk.data.length; i++) {
+    let arr = []
+    arr.push(info_users_ttdk.data[i].area);
+    arr.push(info_users_ttdk.data[i].date);
+    arr.push(info_users_ttdk.data[i].gender);
+    arr.push(info_users_ttdk.data[i].memo);
+    arr.push(info_users_ttdk.data[i].name);
+    arr.push(info_users_ttdk.data[i].part);
+    arr.push(info_users_ttdk.data[i].phone);
+    arr.push(info_users_ttdk.data[i].role);
+    arr.push(info_users_ttdk.data[i].sn);
+    
+    regist_data.push(arr);
+  }
 
   // 生成excel
   try {
     //1,定义excel表格名
     let dataCVS = 'books_ttdk.xlsx'
+
     //2，定义存储数据的
     let alldata = [];
-    let row = ['序号', '姓名', '日期', '公司', '返京日期', '体温', '参与项目']; //表属性
+    let row = ['序号', '姓名', '登记日期', '公司', '返京日期', '体温', '参与项目', '健康码url', 'urlMsg']; 
     alldata.push(row);
 
     // 生成打卡excel
@@ -76,10 +90,14 @@ exports.main = async (event, context) => {
       arr.push(users_info[books_ttdk.data[i].sn].date);
       arr.push('正常');
       arr.push('易路行测试');
+      let result = await cloud.getTempFileURL({
+        fileList: [books_ttdk.data[i].health],
+      })
+      arr.push(result.fileList[0].tempFileURL)
+      arr.push(result.fileList[0].errMsg)
 
       alldata.push(arr)
     }
-    console.log('表格', alldata)
 
     //3，把数据保存到excel里
     var buffer = await xlsx.build([{
@@ -87,7 +105,7 @@ exports.main = async (event, context) => {
       data: alldata
     }, {
       name: "总表",
-      data: []
+        data: regist_data
     }]);
 
     //4，把excel文件保存到云存储里
