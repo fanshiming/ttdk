@@ -26,14 +26,15 @@ exports.main = async (event, context) => {
   
   //取系统当前日期 作为打卡日期
   let date = new Date()
-  let the_y = date.getFullYear();
-  let the_m = date.getMonth() + 1;//获取当前月份的日期 
-  let the_d = date.getDate();
+  date.setHours(date.getHours() + 8);    // utc8
+  let the_y = date.getFullYear()
+  let the_m = date.getMonth() + 1
+  let the_d = date.getDate()
   if (the_m < 10) {
-    the_m = '0' + the_m;
+    the_m = '0' + the_m
   };
   if (the_d < 10) {
-    the_d = '0' + the_d;
+    the_d = '0' + the_d
   };
   let the_date = the_y + "-" + the_m + "-" + the_d
 
@@ -48,9 +49,14 @@ exports.main = async (event, context) => {
   }
 
   //组织打卡数据
+  let myHealthUrl = await cloud.getTempFileURL({
+    fileList: [event.health],
+  })
+
   let f_data = {
     date: the_date,
     health: event.health,
+    healthUrl: myHealthUrl.fileList[0].tempFileURL,
     sn: user_base_info.sn
   }
 
@@ -58,6 +64,5 @@ exports.main = async (event, context) => {
     // data 字段表示需新增的 JSON 数据
     data: f_data
   })
-  console.log('新增打卡数据', res2)
   return { rtc: 0, msg: 'ok' }
 }

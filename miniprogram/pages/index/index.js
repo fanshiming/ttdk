@@ -166,15 +166,14 @@ Page({
       count: 1,
       sizeType: ['compressed'],
       sourceType: ['album', 'camera'],
-      success: function (res) {
+      success: (res) => {
         wx.showLoading({
           title: '上传中',
+          mask: true
         })
         const filePath = res.tempFilePaths[0]
-
         //取系统当前日期 作为打卡日期
         let the_date = that.dateToString(new Date())
-
         // 上传图片
         const cloudPath = 'ttdk/healthcode-'
           + that.data.userInfo.sn + '-'
@@ -187,7 +186,7 @@ Page({
           cloudPath: cloudPath,
           filePath: filePath,
           // 成功回调
-          success: res => {
+          success: (res) => {
             that.setData({
               healthcode_fileid: res.fileID
             })     
@@ -196,7 +195,6 @@ Page({
               name: 'signin',
               data: { health: that.data.healthcode_fileid },
               success: res => {
-                console.log('[云函数] [signin] : ', res)
                 if (res.result.rtc == 0) {
                   let c_date = new Date()
                   that.setData({
@@ -218,25 +216,26 @@ Page({
                 }
               },
               fail: err => {
-                console.error('[云函数] [register] 调用失败', err)
                 wx.showToast({
                   title: 'err ' + err,
                 })
               }
             })
           },
-          fail: e => {
-            console.error('[上传健康码] 失败：', e)
+          fail: () => {
             wx.showToast({
               icon: 'none',
               title: '上传健康码失败',
             })
           },
-          complete:() =>{},
-        })      
-      complete: () => {
-        wx.hideLoading()
-      }}})
+          complete:() =>{
+            wx.hideLoading()
+          },
+        })
+      },   
+      fail:  () => {},  
+      complete: () => {}
+    })
   },
 
   nav_to_info: function(){

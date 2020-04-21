@@ -1,9 +1,8 @@
 {
-  "pages": [    
+  "pages": [   
     "pages/index/index",
-    "pages/sign/sign",
+    "pages/sign/sign",    
     "pages/chooseLib/chooseLib",
-    "pages/showHealth",
     "pages/healthBook/healthBook",
     "pages/showHealth/showHealth"
   ],
