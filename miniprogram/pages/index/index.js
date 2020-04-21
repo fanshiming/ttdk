@@ -169,6 +169,7 @@ Page({
       success: (res) => {
         wx.showLoading({
           title: '上传中',
+          mask: true
         })
         const filePath = res.tempFilePaths[0]
         //取系统当前日期 作为打卡日期
@@ -194,7 +195,6 @@ Page({
               name: 'signin',
               data: { health: that.data.healthcode_fileid },
               success: res => {
-                console.log('[云函数] [signin] : ', res)
                 if (res.result.rtc == 0) {
                   let c_date = new Date()
                   that.setData({
@@ -228,13 +228,13 @@ Page({
               title: '上传健康码失败',
             })
           },
-          complete:() =>{},
+          complete:() =>{
+            wx.hideLoading()
+          },
         })
       },   
       fail:  () => {},  
-      complete: () => {
-        wx.hideLoading()
-      }
+      complete: () => {}
     })
   },
 
