@@ -66,7 +66,10 @@ Page({
   },
 
   // the_date_string: '2020-04-20'
-  getHealthBook: function(the_date_string) {    
+  getHealthBook: function(the_date_string) {  
+    this.setData({
+      ttdk_current: [],
+    })
     if (!this.data.books_ttdk.has(this.data.date_current)){
       wx.showLoading({
         mask: true,
