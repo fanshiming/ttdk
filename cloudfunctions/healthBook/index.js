@@ -32,12 +32,19 @@ exports.main = async (event, context) => {
     tasks.push(promise)
   }
   // 等待所有
-  let info_users = (await Promise.all(tasks)).reduce((acc, cur) => {
+  let info_users = '';
+  if (tasks.length == 0){
+    info_users = {
+      data: [],
+      errMsg: 'ok',
+    }
+  } else {
+  info_users = (await Promise.all(tasks)).reduce((acc, cur) => {
     return {
       data: acc.data.concat(cur.data),
       errMsg: acc.errMsg,
     }
-  })
+  })}
 
   // 先取出集合记录总数
   const countResult2 = await db.collection('books_ttdk').count()
@@ -57,12 +64,20 @@ exports.main = async (event, context) => {
     tasks2.push(promise2)
   }
   // 等待所有信息
-  let books = (await Promise.all(tasks2)).reduce((acc, cur) => {
+  let books = '';
+  if (tasks2.length==0) {
+    books = {
+      data:[],
+      errMsg: 'ok',
+    }
+  }
+  else {
+  books = (await Promise.all(tasks2)).reduce((acc, cur) => {
     return {
       data: acc.data.concat(cur.data),
       errMsg: acc.errMsg,
     }
-  })
+  })}
 
   return { user: info_users.data, book: books.data, msg: 'ok' }
 }
