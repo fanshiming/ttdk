@@ -7,6 +7,7 @@ cloud.init({
 })
 
 const db = cloud.database()
+const MAX_LIMIT = 100
 
 // 云函数入口函数
 exports.main = async (event, context) => {
@@ -16,19 +17,67 @@ exports.main = async (event, context) => {
     openid: wxContext.OPENID
   }).get()
   if (res.data.length == 0) {
-    return { user:'', book: '', msg: '权限不足' }
+    return { user: '', book: '', msg: '权限不足' }
   }
 
-  //查找用户表
-  let info_users = await db.collection('info_users_ttdk').get()
+  // 先取出集合记录总数
+  const countResult = await db.collection('info_users_ttdk').count()
+  const total = countResult.total
+  // 计算需分几次取
+  const batchTimes = Math.ceil(total / 100)
+  // 承载所有读操作的 promise 的数组
+  const tasks = []
+  for (let i = 0; i < batchTimes; i++) {
+    const promise = db.collection('info_users_ttdk').skip(i * MAX_LIMIT).limit(MAX_LIMIT).get()
+    tasks.push(promise)
+  }
+  // 等待所有
+  let info_users = '';
+  if (tasks.length == 0){
+    info_users = {
+      data: [],
+      errMsg: 'ok',
+    }
+  } else {
+  info_users = (await Promise.all(tasks)).reduce((acc, cur) => {
+    return {
+      data: acc.data.concat(cur.data),
+      errMsg: acc.errMsg,
+    }
+  })}
 
-  //查找打卡表
-  let books = await db.collection('books_ttdk')
-  .field({
-    date: true,
-    health: true,
-    sn: true,})
-    .get()
+  // 先取出集合记录总数
+  const countResult2 = await db.collection('books_ttdk').count()
+  const total2 = countResult2.total
+  // 计算需分几次取
+  const batchTimes2 = Math.ceil(total2 / 100)
+  // 承载所有读操作的 promise 的数组
+  const tasks2 = []
+  for (let i = 0; i < batchTimes2; i++) {
+    const promise2 = db.collection('books_ttdk')
+      .field({
+        date: true,
+        health: true,
+        sn: true,
+      })
+      .skip(i * MAX_LIMIT).limit(MAX_LIMIT).get()
+    tasks2.push(promise2)
+  }
+  // 等待所有信息
+  let books = '';
+  if (tasks2.length==0) {
+    books = {
+      data:[],
+      errMsg: 'ok',
+    }
+  }
+  else {
+  books = (await Promise.all(tasks2)).reduce((acc, cur) => {
+    return {
+      data: acc.data.concat(cur.data),
+      errMsg: acc.errMsg,
+    }
+  })}
 
-  return {user: info_users.data, book: books.data, msg: 'ok' }
+  return { user: info_users.data, book: books.data, msg: 'ok' }
 }

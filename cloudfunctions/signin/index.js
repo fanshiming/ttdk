@@ -26,7 +26,9 @@ exports.main = async (event, context) => {
   
   //取系统当前日期 作为打卡日期
   let date = new Date()
+  console.log('系统日期', date)
   date.setHours(date.getHours() + 8);    // utc8
+  console.log('系统日期+8', date)
   let the_y = date.getFullYear()
   let the_m = date.getMonth() + 1
   let the_d = date.getDate()
@@ -37,6 +39,7 @@ exports.main = async (event, context) => {
     the_d = '0' + the_d
   };
   let the_date = the_y + "-" + the_m + "-" + the_d
+  console.log('入库日期字符串', the_date)
 
 // 检测是否已经打过卡
   res = await db.collection("books_ttdk")

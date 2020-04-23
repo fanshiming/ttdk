@@ -1,5 +1,5 @@
 {
-  "name": "fk_ttdk_data",
+  "name": "getUsersInfo",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,7 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "node-xlsx": "^0.15.0",
     "wx-server-sdk": "latest"
   }
 }
