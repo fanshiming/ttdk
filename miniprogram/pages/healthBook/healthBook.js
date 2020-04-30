@@ -88,6 +88,7 @@ Page({
               gender: this.data.info_users_ttdk.get(item.sn).gender,
               area: this.data.info_users_ttdk.get(item.sn).area,
               health: item.health,
+              phone: this.data.info_users_ttdk.get(item.sn).phone
             })
           }
           this.data.books_ttdk.set(the_date_string, the_rows);
@@ -182,6 +183,12 @@ Page({
       date_current: dateToString(nextDate)
     })
     this.update_ttdk_current(dateToString(nextDate))
+  },
+
+  callMe: function (event) {
+    wx.makePhoneCall({
+      phoneNumber: event.currentTarget.dataset.phone
+    })
   },
 
   /**
