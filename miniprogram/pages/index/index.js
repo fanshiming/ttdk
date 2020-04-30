@@ -114,7 +114,7 @@ Page({
       success: res => {
         if (res.result.userInfo.length == 0){
           app.globalData.logged = false
-          console.log('没有查找到用户信息，跳转到注册页面')
+          // console.log('没有查找到用户信息，跳转到注册页面')
           wx.navigateTo({
             url: '../sign/sign',
         })} 
@@ -153,7 +153,10 @@ Page({
         }  
       },
       fail: err => {
-        console.error('[云函数] [login] 调用失败', err)
+        //console.error('[云函数] [login] 调用失败', err)
+        ws.showToast({
+          title: '调用login失败'
+        })
       }
     })   
   },

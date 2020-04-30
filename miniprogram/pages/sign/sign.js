@@ -16,7 +16,7 @@ Page({
     area_index: 1,
     bird: ['火车', '飞机', '自驾', '未离京'],
     bird_index: 0,
-    laiwang: ['配合测试', '外协', '借调'],
+    laiwang: ['配合测试', '外协', '借调', '安全员'],
     laiwang_index: 0,
     date: '2019-12-31',
     token: ''

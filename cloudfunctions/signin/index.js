@@ -51,15 +51,15 @@ exports.main = async (event, context) => {
     return {rtc: 2, msg:'今日已打卡'}
   }
 
-  //组织打卡数据
-  let myHealthUrl = await cloud.getTempFileURL({
-    fileList: [event.health],
-  })
+  //组织打卡数据  根据已上传的文件ID获取下载链接
+  // let myHealthUrl = await cloud.getTempFileURL({
+  //   fileList: [event.health],
+  // })
 
   let f_data = {
     date: the_date,
     health: event.health,
-    healthUrl: myHealthUrl.fileList[0].tempFileURL,
+    // healthUrl: myHealthUrl.fileList[0].tempFileURL,
     sn: user_base_info.sn
   }
 
