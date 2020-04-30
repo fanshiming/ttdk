@@ -2,7 +2,8 @@
   <scroll-view scroll-y="true" class="bus-list ">
     <block wx:for="{{ttdk_current}}" wx:key="k">
       <view class="bus-list-item">
-        <view class="bus-time" bindtap="callMe" data-phone="{{item.phone}}">{{item.name}}</view>
+        <view class="bus-time" bindlongtap="callMe" data-phone="{{item.phone}}">
+        {{item.name}}</view>
         <view class="tobooking" bindtap="showHealth" id="{{item.health}}"> 健康码 </view>
         <view class="detail">
           <view class="detail1">
