@@ -20,7 +20,7 @@ exports.main = async (event, context) => {
   var res2 = ''
   if (res.data.length>0){
     res2 = await db.collection('books_ttdk').where({sn: res.data[0].sn})
-    .field({date: true, health: true})
+      .field({ _id: false, date: true, })
     .get()
   }
     
