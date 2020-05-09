@@ -18,7 +18,7 @@ exports.main = async (event, context) => {
     openid: wxContext.OPENID
   }).get()
   if (res.data.length == 0) {
-    return { user: '', book: '', msg: '权限不足' }
+    return { data: [], errMsg: '权限不足' }
   }
 
   // 先取出集合记录总数

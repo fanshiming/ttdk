@@ -52,27 +52,6 @@ Page({
   next: function(event){
     this.signBookShow(event.detail.currentYear, event.detail.currentMonth)
   },
-  //点击显示健康码
-  dayClick: function (event) {
-    /** 不显示
-    this.setData({
-      health_fix: ''
-    })
-    let file_id = '';
-    for (let i = 0; i < this.data.signBook.length; i++){
-      let the_date = this.data.signBook[i].date
-      if (event.detail.year == the_date.getFullYear() &&
-        event.detail.month == (the_date.getMonth()+1) &&
-        event.detail.day == the_date.getDate()
-      ){
-        this.setData({
-          health_fix: this.data.signBook[i].healthcode_fileid
-        })
-        break;
-      }
-    }
-    */
-  },
 
   //设置日历打卡信息  month=1时 date().month=0
   signBookShow: function(year, month){
@@ -130,7 +109,7 @@ Page({
           for (let i = 0; i < res.result.signBook.length; i++){
             signBook.push({
               date: this.stringToDate(res.result.signBook[i].date, '-'), 
-              healthcode_fileid: res.result.signBook[i].health})
+              })
           }
 
           let current_date = new Date()          
@@ -153,9 +132,9 @@ Page({
         }  
       },
       fail: err => {
-        //console.error('[云函数] [login] 调用失败', err)
-        ws.showToast({
-          title: '调用login失败'
+        // console.error('[云函数] [login] 调用失败', err)
+        wx.showToast({
+          title: 'login失败'
         })
       }
     })   
