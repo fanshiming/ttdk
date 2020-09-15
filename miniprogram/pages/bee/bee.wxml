@@ -1,0 +1,15 @@
+<view class="page" data-weui-theme="{{theme}}">
+  <view class="page__hd">
+    <view class="page__title">Welcome</view>
+    <view class="page__desc">停云霭霭 时雨濛濛</view>
+     <view class="page__desc">八表同昏 平陆成江</view>
+  </view>
+  <view class="weui-grids">
+    <block wx:for="{{beeTo}}">
+      <a class="weui-grid">
+        <a class="weui-grid__label" bindtap="nav_to_nurl" data-nurl="{{item.url}}">{{item.nickname}}</a>
+      </a>
+    </block>
+  </view>
+
+</view>
