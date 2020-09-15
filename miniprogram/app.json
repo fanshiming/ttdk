@@ -1,10 +1,12 @@
 {
-  "pages": [   
+  "pages": [
+    "pages/bee/bee",
     "pages/index/index",
-    "pages/sign/sign",    
+    "pages/sign/sign",
     "pages/chooseLib/chooseLib",
     "pages/healthBook/healthBook",
     "pages/showHealth/showHealth"
+    
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
