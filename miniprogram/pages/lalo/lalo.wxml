@@ -1,0 +1,35 @@
+<view class="page">
+  <view>
+  扫描半径(米）：<input placeholder="2" value="{{nest_range}}" bindinput="getInputNestRange" type="number" />
+  </view>
+  <view>
+  扫描数量(个)： 最多<input placeholder="8" value="{{nest_count}}" bindinput="getInputNestCount" type="number" />
+  </view>
+  <view>
+  扫描间隔(4秒)
+  </view>
+
+  <view><text>=====================</text></view>
+  <view>
+  最近门架：<text  style="font-weight:bold">{{nest_gantry[0][3]}}</text>
+  </view>
+  <view>
+  最近距离（米）： <text  style="font-weight:bold">{{nest_gantry[0][0]}}</text>
+  </view>
+
+  <view><text>=====================</text></view>
+  <view><text>=====================</text></view>
+  <view>
+  <text>附近 {{nest_range}} 米内，发现 {{nest_gantry.length}}个门架</text>
+  </view>
+  <view class="page__bd">
+    <block wx:for="{{nest_gantry}}">
+    <view class="weui-cell weui-cell_active weui-cell_access">
+				<view class="weui-cell__bd">
+					<text style="vertical-align: middle;">{{item[3]}}</text>
+					<text class="weui-badge" style="margin-left: 5px;">{{item[0]}} 米</text>
+				</view>
+			</view>
+    </block>
+  </view>
+</view>

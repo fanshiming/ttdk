@@ -7,7 +7,8 @@ Page({
   data: {
     beeTo: [
       {nickname: '健康码', url: '../index/index'},
-      {nickname: '门架扫描', url: ''},
+      {nickname: '门架扫描', url: '../lalo/lalo'},
+      {nickname: '门架追踪', url: '../lalo2/lalo2'},
     ],
   },
 
@@ -69,7 +70,7 @@ Page({
 
   nav_to_nurl: function(event){
     wx.navigateTo({
-      url: event.target.dataset.nurl,
+      url: event.currentTarget.dataset.nurl,
     })
   }
 })
