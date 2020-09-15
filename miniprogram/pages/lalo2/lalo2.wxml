@@ -1,44 +1,42 @@
 <view class="page" data-weui-theme="{{theme}}">
   <view class="weui-form__control-area">
     <view class="weui-cells__group weui-cells__group_form">
-    <view class="weui-cells__title">跟踪的门架</view>
-      <view class="weui-cells weui-cells_form">
-        <view class="weui-cell weui-cell_active">
-          <view class="weui-cell__hd"><label class="weui-label">纬度</label></view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="1.123456" placeholder-class="weui-input__placeholder" 
-              value="{{latitude}}" bindinput="getInputLatitude" type="digit" />
+      <view class="weui-cells__title">跟踪的门架</view>
+        <view class="weui-cells weui-cells_form">
+          <view class="weui-cell weui-cell_active">
+            <view class="weui-cell__hd"><label class="weui-label">纬度</label></view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" placeholder="1.123456" placeholder-class="weui-input__placeholder" 
+                value="{{latitude}}" bindinput="getInputLatitude" type="digit" />
+            </view>
           </view>
-        </view>
-        <view class="weui-cell weui-cell_active">
-          <view class="weui-cell__hd">							
-                          <label class="weui-label">经度</label>
-                      </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" placeholder="1.123456" placeholder-class="weui-input__placeholder" 
-            value="{{latitude}}" bindinput="getInputLongitude" type="digit" />
+          <view class="weui-cell weui-cell_active">
+            <view class="weui-cell__hd">							
+                            <label class="weui-label">经度</label>
+                        </view>
+            <view class="weui-cell__bd">
+              <input class="weui-input" placeholder="1.123456" placeholder-class="weui-input__placeholder" 
+              value="{{longitude}}" bindinput="getInputLongitude" type="digit" />
+            </view>
           </view>
-        </view>
-         <view class="weui-cell weui-cell_active">
-          <view class="weui-cell__hd">							
-                          <label class="weui-label">扫描间隔(ms)</label>
-                      </view>
-          <view class="weui-cell__bd weui-cell_disabled">
-            <input class="weui-input" placeholder="1.123456" placeholder-class="weui-input__placeholder" 
-            disabled value="{{nest_interval}}" bindinput="getNestInterval" type="number" />
+          <view class="weui-cell weui-cell_active">
+            <view class="weui-cell__hd">							
+                            <label class="weui-label">扫描间隔 ms</label>
+                        </view>
+            <view class="weui-cell__bd weui-cell_disabled">
+              <input class="weui-input" placeholder="1.123456" placeholder-class="weui-input__placeholder" 
+              disabled value="{{nest_interval}}" bindinput="getNestInterval" type="number" />
+            </view>
           </view>
         </view>
       </view>
     </view>
-  </view>
 
-  <view class="item"><text>=====================</text></view>
-  <view class="page_bd">
-    <view class="weui-cell weui-cell_active weui-cell_access">
-      <view class="weui-cell__bd">
-        <text style="vertical-align: middle;">当前相距（米）：</text>
-        <text class="weui-badge" style="margin-left: 5px;">{{cur_dn}} 米</text>
-      </view>
-    </view>
-  </view>
+
+ 
+  <view class="weui-form__tips-area">
+			<view class="weui-form__tips" >
+                当前相距：{{cur_dn}} 米
+			</view>
+		</view>
 </view>

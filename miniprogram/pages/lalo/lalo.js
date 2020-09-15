@@ -517,7 +517,7 @@ Page({
   },
 
   getInputNestInterval: function(e){
-    this.setData({nest_range: e.detail.value})
+    this.setData({nest_interval: e.detail.value})
     this.endSetInter()
     this.startSetInter()
   }  
