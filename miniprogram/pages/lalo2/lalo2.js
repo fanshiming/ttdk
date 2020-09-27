@@ -38,7 +38,7 @@ Page({
     phone_lo: 0,
     // 手机与目标的距离
     cur_dn: 0,
-    nest_interval: 4000,  //扫描间隔 毫秒
+    nest_interval: 2000,  //扫描间隔 毫秒
   },
 
   /**

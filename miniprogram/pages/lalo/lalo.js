@@ -380,7 +380,7 @@ Page({
     nest_range: 12000, // 搜寻范围12公里
     nest_gantry: [],  // 最近门架信息
     nest_count: 8, // 搜寻最大数量
-    nest_interval: 4000, //扫描间隔 毫秒
+    nest_interval: 2000, //扫描间隔 毫秒
     latitude: 0,
     lotitude: 0,
     setInterNum: ''

@@ -25,7 +25,7 @@
                         </view>
             <view class="weui-cell__bd weui-cell_disabled">
               <input class="weui-input" placeholder="1.123456" placeholder-class="weui-input__placeholder" 
-              value="{{nest_interval}}" bindinput="getInputNestInterval" type="number" />
+              disabled value="{{nest_interval}}" bindinput="getInputNestInterval" type="number" />
             </view>
           </view>
         </view>
