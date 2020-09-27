@@ -21,11 +21,11 @@
           </view>
           <view class="weui-cell weui-cell_active">
             <view class="weui-cell__hd">							
-                            <label class="weui-label">扫描间隔 ms</label>
-                        </view>
+              <label class="weui-label">扫描间隔 ms</label>
+            </view>
             <view class="weui-cell__bd weui-cell_disabled">
               <input class="weui-input" placeholder="1.123456" placeholder-class="weui-input__placeholder" 
-              disabled value="{{nest_interval}}" bindinput="getNestInterval" type="number" />
+              value="{{nest_interval}}" bindinput="getNestInterval" type="number" />
             </view>
           </view>
         </view>

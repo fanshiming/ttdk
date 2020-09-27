@@ -72,5 +72,9 @@ Page({
     wx.navigateTo({
       url: event.currentTarget.dataset.nurl,
     })
+  },
+
+  openSetting: function(){
+    wx.openSetting()
   }
 })
