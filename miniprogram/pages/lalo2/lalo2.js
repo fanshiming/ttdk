@@ -1,28 +1,5 @@
-// miniprogram/pages/lalo2/lalo2.js
+const calcDistance = require("../../utils/lalo.js").calcDistance;
 
-function countDist2(lat1, lng1, lat2, lng2) {//纬度1,经度1,纬度2,经度2
-      var f = ((lat1 + lat2) / 2) * Math.PI / 180.0;  
-      var g = ((lat1 - lat2) / 2) * Math.PI / 180.0;  
-      var l = ((lng1 - lng2) / 2) * Math.PI / 180.0;  
-      var sg = Math.sin(g);  
-      var sl = Math.sin(l);  
-      var sf = Math.sin(f);  
-      var s, c, w, r, d, h1, h2;  
-      var a = 6378137.0;//地球的直径  
-      var fl = 1 / 298.257;  
-      sg = sg * sg;  
-      sl = sl * sl;  
-      sf = sf * sf;  
-      s = sg * (1 - sl) + (1 - sf) * sl;  
-      c = (1 - sg) * (1 - sl) + sf * sl;  
-      w = Math.atan(Math.sqrt(s / c));  
-      r = Math.sqrt(s * c) / w;  
-      d = 2 * w * a;  
-      h1 = (3 * r - 1) / 2 / c;  
-      h2 = (3 * r + 1) / 2 / s;  
-      var num = d * (1 + fl * (h1 * sf * (1 - sg) - h2 * (1 - sf) * sg))  
-      return num;//返回单位:米  
-  }
 
 Page({
 
@@ -129,8 +106,8 @@ Page({
           const speed = res.speed
           const accuracy = res.accuracy
 
-          let dn = countDist2(that.data.latitude, that.data.longitude, latitude, longitude)
-        
+          let dn = calcDistance(that.data.latitude, that.data.longitude, latitude, longitude)
+          console.log("计算距离 ", dn)
           that.setData({
             cur_dn: Math.floor(dn)
           })
@@ -144,5 +121,19 @@ Page({
   endSetInter: function () {
     var that = this;
     clearInterval(that.data.setInter)
+  },
+
+  // 获取当前的纬度和经度
+  changeLalo: function(){
+    var that = this;
+    wx.getLocation({
+      type: 'wgs84',
+      success (res) {
+        that.setData({
+          latitude: res.latitude,
+          longitude:  res.longitude
+        })
+      }
+     })  
   }
 })

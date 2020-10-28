@@ -31,12 +31,18 @@
         </view>
       </view>
     </view>
-
-
  
   <view class="weui-form__tips-area">
 			<view class="weui-form__tips" >
                 当前相距：{{cur_dn}} 米
 			</view>
 		</view>
+
+  <view class="page__bd">
+		<view class="button-sp-area">
+      <view class="button-sp-area cell">
+        <a class="weui-btn_cell weui-btn_cell-primary" bindtap="changeLalo">获取当前的纬度经度</a>
+      </view>
+    </view>
+  </view>
 </view>

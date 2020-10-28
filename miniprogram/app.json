@@ -6,7 +6,8 @@
     "pages/healthBook/healthBook",
     "pages/showHealth/showHealth",
     "pages/lalo/lalo",
-    "pages/lalo2/lalo2"
+    "pages/lalo2/lalo2",
+    "pages/chedaoxunjian/chedaoxunjian"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -18,11 +19,7 @@
   "permission": {
     "scope.userLocation": {
       "desc": "你的位置信息将用于计算距离"
-    },
-    "scope.userLocationBackground":{
-      "desc": "你的位置信息将用于后台自动计算距离"
-    },
-    "scope.scope.userInfo":{}
+    }
   },
   "plugins": {
     "calendar": {
