@@ -8,7 +8,9 @@ Page({
     beeTo: [
       {nickname: '健康码', url: '../index/index'},
       {nickname: '门架扫描', url: '../lalo/lalo'},
-      {nickname: '门架追踪', url: '../lalo2/lalo2'},
+      {nickname: '距离定位', url: '../lalo2/lalo2'},
+      {nickname: '门架巡检', url: '../chedaoxunjian/chedaoxunjian'},
+      {nickname: '质量报告', url: '../zhiliangbaogao/zhiliangbaogao'},
     ],
   },
 
@@ -72,5 +74,9 @@ Page({
     wx.navigateTo({
       url: event.currentTarget.dataset.nurl,
     })
+  },
+
+  openSetting: function(){
+    wx.openSetting()
   }
 })

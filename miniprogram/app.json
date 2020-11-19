@@ -3,11 +3,14 @@
     "pages/bee/bee",
     "pages/index/index",
     "pages/sign/sign",
-    "pages/chooseLib/chooseLib",
     "pages/healthBook/healthBook",
     "pages/showHealth/showHealth",
     "pages/lalo/lalo",
-    "pages/lalo2/lalo2"
+    "pages/lalo2/lalo2",
+    "pages/chedaoxunjian/chedaoxunjian",
+    "pages/zhiliangbaogao/zhiliangbaogao",
+    "pages/baogao2/baogao2",
+    "pages/baogao3/baogao3"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -15,6 +18,11 @@
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "甲9 book",
     "navigationBarTextStyle": "black"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于计算距离"
+    }
   },
   "plugins": {
     "calendar": {

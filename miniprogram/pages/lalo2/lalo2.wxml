@@ -1,7 +1,7 @@
 <view class="page" data-weui-theme="{{theme}}">
   <view class="weui-form__control-area">
     <view class="weui-cells__group weui-cells__group_form">
-      <view class="weui-cells__title">跟踪的门架</view>
+      <view class="weui-cells__title">定位点</view>
         <view class="weui-cells weui-cells_form">
           <view class="weui-cell weui-cell_active">
             <view class="weui-cell__hd"><label class="weui-label">纬度</label></view>
@@ -21,8 +21,8 @@
           </view>
           <view class="weui-cell weui-cell_active">
             <view class="weui-cell__hd">							
-                            <label class="weui-label">扫描间隔 ms</label>
-                        </view>
+              <label class="weui-label">扫描间隔 ms</label>
+            </view>
             <view class="weui-cell__bd weui-cell_disabled">
               <input class="weui-input" placeholder="1.123456" placeholder-class="weui-input__placeholder" 
               disabled value="{{nest_interval}}" bindinput="getNestInterval" type="number" />
@@ -31,12 +31,18 @@
         </view>
       </view>
     </view>
-
-
  
   <view class="weui-form__tips-area">
 			<view class="weui-form__tips" >
                 当前相距：{{cur_dn}} 米
 			</view>
 		</view>
+
+  <view class="page__bd">
+		<view class="button-sp-area">
+      <view class="button-sp-area cell">
+        <a class="weui-btn_cell weui-btn_cell-primary" bindtap="changeLalo">获取当前的纬度经度作为定位点</a>
+      </view>
+    </view>
+  </view>
 </view>

@@ -8,7 +8,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    nest_range: 12000, // 搜寻范围12公里
+    gaosugonglu: [],  // 高速公路
+    gaosu_chosen: '',  // 选定的高速公路
+    menjia_chosen: [],   // 选定的高速公路上的门架列表
+    menjia:{},
+    nest_range: 300000, // 搜寻范围300公里
     nest_gantry: [],  // 最近门架信息
     nest_count: 8, // 搜寻最大数量
     nest_interval: 2000, //扫描间隔 毫秒
@@ -21,7 +25,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) { 
-    this.startSetInter()  
+    this.anayGantryList(gantrys);
+    this.startSetInter();
   },
 
   /**
@@ -73,33 +78,53 @@ Page({
 
   },
 
+  // 分解获取高速路门架信息
+  anayGantryList: function(theGantry){
+    let gaosu = new Set();
+    for (let i=0; i < theGantry.length; i++){
+      let _gaosu = theGantry[i][3];
+      gaosu.add(_gaosu);
+    }
+    let menjia = {};
+    for(let item of gaosu.values()){
+      menjia[item] = []
+    }
+
+    for (let i=0; i < theGantry.length; i++){
+      menjia[theGantry[i][3]].push(theGantry[i])
+    }
+
+    this.setData({
+      gaosugonglu: Array.from(gaosu),
+      menjia: menjia,
+      gaosu_chosen:  0,
+      menjia_chosen: menjia[Array.from(gaosu)[0]]
+    });
+  },
+
   // 开始定时
   startSetInter: function () {
-    var that = this;
-    that.data.setInter = setInterval(function () {      
-      let m = that.data.message;
+    let that = this;
+    that.data.setInter = setInterval(function () { 
+      let m = that.data.message;      
       wx.getLocation({
         type: 'wgs84',
         success (res) {
           const latitude = res.latitude
           const longitude = res.longitude
-          const speed = res.speed
-          const accuracy = res.accuracy
           let _nest_gantry = []
-          let _cur_count = 0;
-          for (var i = 0; i < gantrys.length; i++){
-            let dn = calcDistance(gantrys[i][0], gantrys[i][1],latitude, longitude)
+          for (let i = 0; i < that.data.menjia_chosen.length; i++){
+            let dn = calcDistance(that.data.menjia_chosen[i][0], that.data.menjia_chosen[i][1],latitude, longitude)
             if (dn <= that.data.nest_range){
               let _gantry = []  
               _gantry.push(Math.floor(dn))          
-              _gantry.push(gantrys[i][0])
-              _gantry.push(gantrys[i][1])
-              _gantry.push(gantrys[i][2])            
+              _gantry.push(that.data.menjia_chosen[i][0])
+              _gantry.push(that.data.menjia_chosen[i][1])
+              _gantry.push(that.data.menjia_chosen[i][2])            
               _nest_gantry.push(_gantry)
             }            
           }
-          _nest_gantry.sort(function(a,b){return a[0]-b[0]});
-                  
+          _nest_gantry.sort(function(a,b){return a[0]-b[0]});      
           that.setData({
             nest_gantry: _nest_gantry.slice(0, that.data.nest_count)
           })
@@ -111,8 +136,7 @@ Page({
 
   //清除计时器 即清除setInter
   endSetInter: function () {
-    var that = this;
-    clearInterval(that.data.setInter)
+    clearInterval(this.data.setInter)
   },
 
   getInputNestRange: function(e){
@@ -127,5 +151,12 @@ Page({
     this.setData({nest_interval: e.detail.value})
     this.endSetInter()
     this.startSetInter()
-  }  
+  },
+  
+  bindGaosugongluChange: function(e) {
+    this.setData({
+        gaosu_chosen: e.detail.value,
+        menjia_chosen: this.data.menjia[this.data.gaosugonglu[e.detail.value]]
+    });
+},
 })
