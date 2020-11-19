@@ -39,3 +39,14 @@ colors: '14 #3c5281  4 #f5a8f0  other #84e7d0',
     返回： res.result{rtc:0, msg:'msg'}
      rtc：0 注册成功， 1 已存在该用户  2口令错误
      msg: 对rtc的描述
+     
+     
+     云函数 getObuBooks
+    功能：获取数据表的所有记录
+        由于近期无法生成新的云函数，故改造了此云函数，使之为获取数据表的所有记录
+    参数：data = {
+      tableName: 数据表的名字  比如  books_zhiliangyuebao
+    }
+    返回： res.result{data:[{},...], errMsg:'msg'}
+     data：数据记录的数组
+     errMsg: 对函数调用结果的描述
