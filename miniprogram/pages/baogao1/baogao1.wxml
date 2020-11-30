@@ -1,0 +1,16 @@
+<view class="page" data-weui-theme="{{theme}}">
+    <view class="page__hd">
+        <view class="page__title">质量跟踪月报</view>
+        <view class="page__desc"></view>
+    </view>
+    <view class="page__bd">        
+        <view class="weui-cells__title">报告索引</view>
+        <view class="weui-cells weui-cells_after-title">
+          <view wx:for="{{books_zhiliangyuebao}}" bindtap="openDoc" data-cloud="{{item.cloud}}" class="weui-cell weui-cell_access" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">{{item.name}}</view>
+            <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+            </view>
+        </view>     
+        
+    </view>
+</view>
