@@ -7,10 +7,12 @@ Page({
   data: {
     beeTo: [
       {nickname: '健康码', url: '../index/index'},
-      {nickname: '门架扫描', url: '../lalo/lalo'},
+      // {nickname: '门架扫描', url: '../lalo/lalo'},
+      {nickname: '门架图形索引', url: '../etcMap/etcMap'},
       {nickname: '距离定位', url: '../lalo2/lalo2'},
       {nickname: '门架巡检', url: '../chedaoxunjian/chedaoxunjian'},
       {nickname: '质量报告', url: '../zhiliangbaogao/zhiliangbaogao'},
+      
     ],
   },
 

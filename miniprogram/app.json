@@ -11,7 +11,8 @@
     "pages/zhiliangbaogao/zhiliangbaogao",
     "pages/baogao2/baogao2",
     "pages/baogao3/baogao3",
-    "pages/baogao1/baogao1"
+    "pages/baogao1/baogao1",
+    "pages/etcMap/etcMap"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
