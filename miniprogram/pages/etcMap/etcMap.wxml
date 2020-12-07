@@ -7,6 +7,9 @@
       style="width: 100%; height: 100vh;"
       latitude="{{latitude}}"
       longitude="{{longitude}}"
+      show-location="{{isShowPosition}}"
+      show-compass="{{isShowCompass}}"
+      show-scale="{{isShowScale}}"
       markers="{{markers}}"      
       scale="11"
     ></map>
