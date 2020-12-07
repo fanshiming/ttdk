@@ -1,10 +1,7 @@
 
-<view class="page-section page-section-gap">
-  <view>
-    <map
-      class="map"
-      id="map"
-      style="width: 100%; height: 100vh;"
+<view class="page" data-weui-theme="{{theme}}">
+    <map class="map" id="map"
+      style="width: 100%; height: 100vh"
       latitude="{{latitude}}"
       longitude="{{longitude}}"
       show-location="{{isShowPosition}}"
@@ -13,5 +10,4 @@
       markers="{{markers}}"      
       scale="11"
     ></map>
-  </view>
 </view>
