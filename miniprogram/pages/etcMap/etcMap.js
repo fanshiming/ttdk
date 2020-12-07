@@ -8,7 +8,10 @@ Page({
    */
 	data: {		
 		latitude: 39.885915,
-    longitude: 116.312672,
+		longitude: 116.312672,
+		isShowScale: false,
+		isShowCompass: false,
+		isShowPosition: true,
 		markerImgs: [{
 			normal: './imgs/Marker1_Normal@3x.png',
 			active: './imgs/Marker1_Activated@3x.png'
@@ -49,7 +52,28 @@ Page({
 		this.setData({
 			markers:_markers,
 		});  
-  },
+	},
+	// 激活定位控件
+	onChangeShowPosition (event) {
+		const {value} = event.detail;
+		if (value) {
+			wx.getLocation({
+				type: 'gcj02',
+				success: (res) => {
+					const {latitude, longitude} = res;
+					this.setData({
+						location: {
+							latitude,
+							longitude
+						}
+					});
+				}
+			});
+		}
+		this.setData({
+			isShowPosition: value
+		});
+	},
 	onShareAppMessage: function () {
 
 	}
