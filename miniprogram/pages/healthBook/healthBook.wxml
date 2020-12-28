@@ -33,7 +33,7 @@
     <view class="bus-tabs calendar-bar">
       <view class="tabs-item" bindtap="prev">前一天</view>
       <view class="setction item tabs-item">
-        <picker mode="date" value="{{date}}" start="2019-12-31" end="2020-09-01" bindchange="bindDateChange">
+        <picker mode="date" value="{{date}}" start="2019-12-31" end="2022-09-01" bindchange="bindDateChange">
           <view class="picker">{{date_current}} ({{ttdk_current.length}} 人)</view>
         </picker>
       </view>
