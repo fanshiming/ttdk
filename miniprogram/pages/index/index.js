@@ -104,7 +104,8 @@ Page({
             openid: res.result.openid,
             unionid: res.result.unionid
           })
-        
+        // console.log('打印signBook')
+        // console.log(res.result)
           let signBook = []
           for (let i = 0; i < res.result.signBook.length; i++){
             signBook.push({
