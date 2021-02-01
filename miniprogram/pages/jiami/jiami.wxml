@@ -13,16 +13,17 @@
 				<view class="weui-cells weui-cells_form">
 					<view class="weui-cell ">
 						<view class="weui-cell__bd">
-              <textarea class="weui-textarea" value="{{sm4_plain}}" placeholder="输入待加密或者解密的数据，hex字符串，比如  01 23 45 67 89 AB CD EF FE DC BA 98 76 54 32 10 , 若您输入的数值非法，本软件将使用默认值替代但并不进行报错处理，请小心核对输入的数值。"
+              <textarea class="weui-textarea" style="height: 3em" 
+               value="{{sm4_plain}}" placeholder="形如  01 23 45 67 89 AB CD EF 的HEX字符串, 若您输入的数值非法，本软件将使用默认值替代但并不进行报错处理，请小心核对输入的数值。"
               bindinput="plainLength"
               ></textarea>
-							<view class="weui-textarea-counter"><text>待加密解密的数据  </text> <text>{{sm4_plain_length}}</text>/64</view>
+							<view class="weui-textarea-counter"><text>待加密解密的数据  </text> <text>-{{sm4_plain_length}}-</text></view>
             </view>
           </view>
           
           <view class="weui-cell ">
 						<view class="weui-cell__bd">
-              <textarea class="weui-textarea" value="{{sm4_key}}" placeholder="输入密钥， hex字符串，比如  01 23 45 67 89 AB CD EF FE DC BA 98 76 54 32 10" 
+              <textarea class="weui-textarea" style="height: 3em" value="{{sm4_key}}" placeholder="输入密钥， hex字符串，比如  01 23 45 67 89 AB CD EF FE DC BA 98 76 54 32 10" 
               bindinput="keyLength" 
               ></textarea>
 							<view class="weui-textarea-counter"><text>密钥  </text><text>{{sm4_key_length}}</text>/16</view>

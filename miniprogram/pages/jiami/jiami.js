@@ -72,7 +72,7 @@ Page({
     let _p = e.detail.value
     this.setData({
       sm4_plain: _p,
-      sm4_plain_length: _p.length/2,
+      sm4_plain_length: _p.replace(/[^a-f,^A-F,^0-9]/g,"").length/2,
     })
   },
 
@@ -80,53 +80,57 @@ Page({
     let _p = e.detail.value
     this.setData({
       sm4_key: _p,
-      sm4_key_length: _p.length/2,
+      sm4_key_length: _p.replace(/[^a-f,^A-F,^0-9]/g,"").length/2,
     })
   },
 
   sm4Calc1: function(){
-    // 判断明文是否16倍数
-    if (this.data.sm4_plain.length%16 != 0){
+    let msg = this.data.sm4_plain.replace(/[^a-f,^A-F,^0-9]/g,"");
+    let key = this.data.sm4_key.replace(/[^a-f,^A-F,^0-9]/g,"");
+    
+    // 判断
+    if (msg.length % 2 != 0){
       this.setData({
-        desc: '数据长度应是16的倍数'
+        desc: '请核对输入的待加密解密Hex字符串'
       })
       return
     }
-    if (this.data.sm4_key.length%16 != 0){
+    if (key.length != 16*2){
       this.setData({
-        desc: '密钥长度应是16'
+        desc: '请核对输入的密钥长度为16字节'
       })
       return
     }
-    let msg = this.data.sm4_plain
-    let key = this.data.sm4_key
     // 加密
-    let encryptData = sm4.encrypt(msg, key, {padding: 'none'}) // 加密，不使用 padding
+    let _desc = "加密\r\n"
+    let the_data = sm4.encrypt(msg, key, {padding: 'none'}) // 加密，不使用 padding
     this.setData({
-      desc: encryptData
+      desc: _desc + the_data
     })
   },
 
   sm4Calc2: function(){
-    // 判断密文是否16倍数
-    if (this.data.sm4_plain.length%16 != 0){
+    let msg = this.data.sm4_plain.replace(/[^a-f,^A-F,^0-9]/g,"");
+    let key = this.data.sm4_key.replace(/[^a-f,^A-F,^0-9]/g,"");
+    
+    // 判断
+    if (msg.length % 2 != 0){
       this.setData({
-        desc: '数据长度应是16的倍数'
+        desc: '请核对输入的待加密解密Hex字符串'
       })
       return
     }
-    if (this.data.sm4_key.length%16 != 0){
+    if (key.length != 16*2){
       this.setData({
-        desc: '密钥长度应是16'
+        desc: '请核对输入的密钥长度为16字节'
       })
       return
     }
-    let msg = this.data.sm4_plain
-    let key = this.data.sm4_key
-    // 加密
-    let encryptData = sm4.decrypt(msg, key, {padding: 'none'}) // 加密，不使用 padding
+    // 解密
+    let _desc = "解密\r\n"
+    let the_data = sm4.decrypt(msg, key, {padding: 'none'}) // 加密，不使用 padding
     this.setData({
-      desc: encryptData
+      desc: _desc + the_data
     })
   }
 
