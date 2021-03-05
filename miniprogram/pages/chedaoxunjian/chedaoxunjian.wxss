@@ -1,1 +1,14 @@
-/* miniprogram/pages/chedaoxunjian/chedaoxunjian.wxss */
+.flex-wrp{
+  margin-top: 60rpx;
+  display:flex;
+}
+
+.radio-group {
+  display: inline;
+  border-bottom: 1px solid #ddd;
+}
+.radio {
+  display: inline;
+  border-top: 1px solid #ddd;
+  padding: 5px;
+}

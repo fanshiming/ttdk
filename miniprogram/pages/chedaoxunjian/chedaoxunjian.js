@@ -1,6 +1,8 @@
 const gantrys = require("../../utils/gantry.js").gantrys;
-const calcDistance = require("../../utils/lalo.js").calcDistance;
-
+const calculateDistance = require("../../utils/lalo.js").calculateDistance;
+const countDist =  require("../../utils/lalo.js").countDist;
+const calcDistance =  require("../../utils/lalo.js").calcDistance;
+const getDistance =  require("../../utils/lalo.js").getDistance;
 
 // miniprogram/pages/lalo/lalo.js
 Page({
@@ -8,6 +10,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    lalo:[{desc: 'countDist', name: 'a'},
+    {desc: 'calcDistance', name: 'b'},
+    {desc:'getDistance', name: 'c', checked: 'true'},
+    ],
+    laloF: calculateDistance,
     gaosugonglu: [],  // 高速公路
     gaosu_chosen: '',  // 选定的高速公路
     menjia_chosen: [],   // 选定的高速公路上的门架列表
@@ -78,6 +85,36 @@ Page({
 
   },
 
+  /**
+   * 选择了不同的计算经纬度距离的版本
+   */
+  radioChange: function (e) {
+    // console.log('radio发生change事件，携带value值为：', e.detail.value)
+    let _v = e.detail.value
+    switch (_v){
+      case 'a':
+        this.setData({
+        laloF:countDist
+        });
+        break;
+      case 'b':
+        this.setData({
+          laloF:calcDistance
+        });
+        break;
+      case 'c': 
+        this.setData({
+          laloF:getDistance
+        })
+        break;
+      default: 
+        this.setData({
+          laloF:''
+        });
+    }
+    // console.log(this.data.laloF.name)
+  },
+
   // 分解获取高速路门架信息
   anayGantryList: function(theGantry){
     let gaosu = new Set();
@@ -106,6 +143,7 @@ Page({
   startSetInter: function () {
     let that = this;
     that.data.setInter = setInterval(function () { 
+      // console.log(that.data.laloF.name)  
       let m = that.data.message;      
       wx.getLocation({
         type: 'wgs84',
@@ -114,7 +152,7 @@ Page({
           const longitude = res.longitude
           let _nest_gantry = []
           for (let i = 0; i < that.data.menjia_chosen.length; i++){
-            let dn = calcDistance(that.data.menjia_chosen[i][0], that.data.menjia_chosen[i][1],latitude, longitude)
+            let dn = that.data.laloF(that.data.menjia_chosen[i][0], that.data.menjia_chosen[i][1],latitude, longitude)
             if (dn <= that.data.nest_range){
               let _gantry = []  
               _gantry.push(Math.floor(dn))          

@@ -1,5 +1,5 @@
 {
-  "pages": [    
+  "pages": [
     "pages/bee/bee",
     "pages/index/index",
     "pages/sign/sign",
@@ -13,7 +13,9 @@
     "pages/baogao3/baogao3",
     "pages/baogao1/baogao1",
     "pages/etcMap/etcMap",
-    "pages/jiami/jiami"
+    "pages/jiami/jiami",
+    "pages/glyph/glyph",
+    "pages/glyph2/glyph2"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
