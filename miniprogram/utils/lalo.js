@@ -83,4 +83,8 @@ const _calcDistance = calcDistance;
 export { _calcDistance as calcDistance };
 const _getDistance = getDistance;
 export { _getDistance as getDistance };
+
+/**
+ * 统一计算接口
+ */
 export { _getDistance as calculateDistance};
