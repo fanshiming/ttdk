@@ -1,4 +1,4 @@
-const calcDistance = require("../../utils/lalo.js").calcDistance;
+const calculateDistance = require("../../utils/lalo.js").calculateDistance;
 
 
 Page({
@@ -106,7 +106,7 @@ Page({
           const speed = res.speed
           const accuracy = res.accuracy
 
-          let dn = calcDistance(that.data.latitude, that.data.longitude, latitude, longitude)
+          let dn = calculateDistance(that.data.latitude, that.data.longitude, latitude, longitude)
           console.log("计算距离 ", dn)
           that.setData({
             cur_dn: Math.floor(dn)

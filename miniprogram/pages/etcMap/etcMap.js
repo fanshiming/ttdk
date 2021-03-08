@@ -11,7 +11,7 @@ Page({
 		longitude: 116.312672,
 		isShowScale: false,
 		isShowCompass: false,
-		isShowPosition: false,
+		isShowPosition: true,
 		markerImgs: [{
 			normal: './imgs/Marker1_Normal@3x.png',
 			active: './imgs/Marker1_Activated@3x.png'

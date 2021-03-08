@@ -1,5 +1,5 @@
 const gantrys = require("../../utils/gantry.js").gantrys;
-const calcDistance = require("../../utils/lalo.js").calcDistance;
+const calculateDistance = require("../../utils/lalo.js").calculateDistance;
 
 
 // miniprogram/pages/lalo/lalo.js
@@ -88,7 +88,7 @@ Page({
           let _nest_gantry = []
           let _cur_count = 0;
           for (var i = 0; i < gantrys.length; i++){
-            let dn = calcDistance(gantrys[i][0], gantrys[i][1],latitude, longitude)
+            let dn = calculateDistance(gantrys[i][0], gantrys[i][1],latitude, longitude)
             if (dn <= that.data.nest_range){
               let _gantry = []  
               _gantry.push(Math.floor(dn))          

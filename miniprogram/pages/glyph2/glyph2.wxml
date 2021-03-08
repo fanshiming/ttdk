@@ -1,0 +1,6 @@
+<!-- 笔迹（无笔势版本） -->
+<view >   
+    <view class="canvas_area">
+        <canvas canvas-id='myCanvas' class="myCanvas" disable-scroll="true" bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd"></canvas>
+    </view>
+</view>

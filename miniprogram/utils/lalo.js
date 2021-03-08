@@ -1,4 +1,18 @@
-// 计算两个地点之间的距离
+/**
+ * 小程序JavaScriptSDK
+ * 
+ * @version 0.8
+ * @date 2021-03-05
+ */
+
+const EARTH_RADIUS = 6378136.49;
+/**
+ * 计算两个地点之间的距离
+ * @param {纬度1} lat1 
+ * @param {经度1} lng1 
+ * @param {纬度2} lat2 
+ * @param {经度2} lng2 
+ */
 function countDist(lat1, lng1, lat2, lng2) {//纬度1,经度1,纬度2,经度2
       var f = ((lat1 + lat2) / 2) * Math.PI / 180.0;  
       var g = ((lat1 - lat2) / 2) * Math.PI / 180.0;  
@@ -44,8 +58,33 @@ function calcDistance(lat1,  lng1,  lat2,  lng2) {
   s = s * ec;// EARTH_RADIUS ;
   s = Math.round(s);
   return s; // 返回米
-  }
+}
 
+/**
+ * 计算两点间直线距离  qqmap
+ * latFrome  lngFrom  起点的纬度和经度
+ * lngTo  lngTo  终点的纬度和经度
+ * 返回的是距离，单位m
+ */
+function getDistance(latFrom, lngFrom, latTo, lngTo) {
+  var radLatFrom = rad(latFrom);
+  var radLatTo = rad(latTo);
+  var a = radLatFrom - radLatTo;
+  var b = rad(lngFrom) - rad(lngTo);
+  var distance = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(radLatFrom) * Math.cos(radLatTo) * Math.pow(Math.sin(b / 2), 2)));
+  distance = distance * EARTH_RADIUS;
+  distance = Math.round(distance * 10000) / 10000;
+  return parseFloat(distance.toFixed(0));
+}
 
-  module.exports.countDist = countDist;
-  module.exports.calcDistance = calcDistance;
+const _countDist = countDist;
+export { _countDist as countDist };
+const _calcDistance = calcDistance;
+export { _calcDistance as calcDistance };
+const _getDistance = getDistance;
+export { _getDistance as getDistance };
+
+/**
+ * 统一计算接口
+ */
+export { _getDistance as calculateDistance};
