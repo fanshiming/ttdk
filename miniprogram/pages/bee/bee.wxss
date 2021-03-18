@@ -1,1 +1,8 @@
-/* miniprogram/pages/bee/bee.wxss */
+.test{
+  border: 3rpx;
+  border-style: solid;
+  border-color: #EE872A;
+  border-radius: 10rpx;
+  padding:3rpx;
+  margin-left: 120rpx;
+}

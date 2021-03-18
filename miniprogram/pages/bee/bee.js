@@ -6,15 +6,15 @@ Page({
    */
   data: {
     beeTo: [
+      {nickname: 'Glyph2', url: '../glyph2/glyph2'},
+      {nickname: '门架地图', url: '../etcMap/etcMap'},
+      {nickname: '距离定位', url: '../lalo2/lalo2'},
+      {nickname: '门架巡检', url: '../chedaoxunjian/chedaoxunjian'},
+      {nickname: '质量报告', url: '../zhiliangbaogao/zhiliangbaogao'},
+      {nickname: '国密SM4', url: '../jiami/jiami'},
       // {nickname: '健康码', url: '../index/index'},
       // {nickname: '门架扫描', url: '../lalo/lalo'},
-      // {nickname: '门架地图', url: '../etcMap/etcMap'},
-      // {nickname: '距离定位', url: '../lalo2/lalo2'},
-      // {nickname: '门架巡检', url: '../chedaoxunjian/chedaoxunjian'},
-      // {nickname: '质量报告', url: '../zhiliangbaogao/zhiliangbaogao'},
-      // {nickname: '国密SM4', url: '../jiami/jiami'},
       // {nickname: 'Glyph', url: '../glyph/glyph'},
-      {nickname: 'Glyph2', url: '../glyph2/glyph2'},
     ],
   },
 
@@ -22,32 +22,34 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // 调用云函数
-    wx.cloud.callFunction({
-      name: 'getObuBooks',
-      data: {tableName: 'bee_to'},
-      success: res => {
-        //数据落地到内存
-        for (let i = 0; i < res.result.data.length; i++) {
-          this.data.beeTo.push({nickname: res.result.data[i].nickname, 
-            url: res.result.data[i].nav,
-            seq: res.result.data[i].seq});
-        }
-        this.setData({
-          beeTo: this.data.beeTo.sort(function(a,b){return a.seq-b.seq})
-        })
-      },
-      fail: err => {
-        wx.showModal({
-          showCancel: false,
-          title: '',
-          content: '本次未能获取数据，请重试小程序或者检查网络',
-        })
-      },
-      complete: () => {
-        wx.hideLoading();
-      }
-    })
+    /**
+     * 调用云函数
+     */
+    // wx.cloud.callFunction({
+    //   name: 'getObuBooks',
+    //   data: {tableName: 'bee_to'},
+    //   success: res => {
+    //     //数据落地到内存
+    //     for (let i = 0; i < res.result.data.length; i++) {
+    //       this.data.beeTo.push({nickname: res.result.data[i].nickname, 
+    //         url: res.result.data[i].nav,
+    //         seq: res.result.data[i].seq});
+    //     }
+    //     this.setData({
+    //       beeTo: this.data.beeTo.sort(function(a,b){return a.seq-b.seq})
+    //     })
+    //   },
+    //   fail: err => {
+    //     wx.showModal({
+    //       showCancel: false,
+    //       title: '',
+    //       content: '本次未能获取数据，请重试小程序或者检查网络',
+    //     })
+    //   },
+    //   complete: () => {
+    //     wx.hideLoading();
+    //   }
+    // })
   },
 
   /**

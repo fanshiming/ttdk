@@ -22,6 +22,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.getSetting({
+      success (res) {
+        if (res.authSetting["scope.userLocation"] != true){
+          wx.showModal({
+            title: "需要授权",
+            content: '为了更好的使用体验，请到小程序首页-授权设置-中，授予使用地理位置的权限',
+            confirmText: '我知道了',
+            showCancel: false,
+          })
+        }
+      },        
+    })
     this.startSetInter()
   },
 

@@ -21,7 +21,7 @@ function countDist(lat1, lng1, lat2, lng2) {//纬度1,经度1,纬度2,经度2
       var sl = Math.sin(l);  
       var sf = Math.sin(f);  
       var s, c, w, r, d, h1, h2;  
-      var a = 6378137.0;//地球的直径  
+      var a = EARTH_RADIUS;//地球的直径  
       var fl = 1 / 298.257;  
       sg = sg * sg;  
       sl = sl * sl;  
