@@ -24,7 +24,7 @@ Page({
   onLoad: function (options) {
     wx.getSetting({
       success (res) {
-        if (res.authSetting["scope.userLocation"] != true){
+        if (!res.authSetting["scope.userLocation"]){
           wx.showModal({
             title: "需要授权",
             content: '为了更好的使用体验，请到小程序首页-授权设置-中，授予使用地理位置的权限',
