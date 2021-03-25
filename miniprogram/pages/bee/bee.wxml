@@ -3,7 +3,7 @@
     <view class="page__title">无题</view>
     <view class="page__desc">停云霭霭 时雨濛濛</view>
     <view class="page__desc">八表同昏 平陆成江</view>
-    <view class="page__desc">----上上签</view>
+    <view class="page__desc"><text class="test">上上签</text></view>
   </view>
   <view class="weui-grids">
     <a class="weui-grid weui-grid__label" bindtap="openSetting">授权设置</a>
