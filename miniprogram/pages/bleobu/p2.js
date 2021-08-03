@@ -113,7 +113,7 @@ Page({
         wx.hideLoading()
         wx.showModal({
           title: "无法连接",
-          content: '请确认蓝牙OBU是否处于开启状态',
+          content: '请确认蓝牙OBU处于开启状态',
           confirmText: "我知道了",
           showCancel: false,
           success: (res) => {
