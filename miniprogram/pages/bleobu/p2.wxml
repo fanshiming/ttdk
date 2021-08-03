@@ -1,0 +1,17 @@
+<view class="page" data-weui-theme="{{theme}}">
+  <view class="page__hd tool_menu">
+    <button bindtap="closeBLEConnection" type="primary" plain="True" class="tool_menu_item">断开连接</button>
+    <button bindtap="read_sys_info" type="primary" plain="True" class="tool_menu_item">读系统信息</button>    
+  </view>
+
+  <view class="page__bd">
+    <view class="weui-cells__title">数据：</view>
+		<view class="weui-cells">      
+      <view class="weui-cell weui-cell_active weui-cell_access"  wx:for="{{messages}}">
+        <view class="weui-cell__bd">					
+          <view class="the_weui_cell_bd_summary msg">{{item}}</view>
+			  </view>
+      </view>  
+    </view>      
+  </view>
+</view>

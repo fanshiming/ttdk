@@ -12,6 +12,7 @@ Page({
       {nickname: '门架巡检', url: '../chedaoxunjian/chedaoxunjian'},
       {nickname: '质量报告', url: '../zhiliangbaogao/zhiliangbaogao'},
       {nickname: '国密SM4', url: '../jiami/jiami'},
+      {nickname: '蓝牙OBU', url: '../bleobu/p1'},
       // {nickname: '健康码', url: '../index/index'},
       // {nickname: '门架扫描', url: '../lalo/lalo'},
       // {nickname: 'Glyph', url: '../glyph/glyph'},

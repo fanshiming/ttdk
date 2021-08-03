@@ -1,0 +1,28 @@
+<view class="page" data-weui-theme="{{theme}}">
+  <view class="page__hd tool_menu">
+    <button bindtap="openBluetoothAdapter" type="primary" plain="True" class="tool_menu_item">开始扫描</button>
+    <button bindtap="stopBluetoothDevicesDiscovery" type="primary" plain="True" class="tool_menu_item">停止扫描</button>
+    <button bindtap="closeBluetoothAdapter" type="primary" plain="True" class="tool_menu_item">结束流程</button>
+  </view>
+
+  <view class="page__bd">
+    <view class="weui-cells__title">已发现 {{devices.length}} 个外围设备：</view>
+		<view class="weui-cells">      
+      <view class="weui-cell weui-cell_active weui-cell_access"
+        wx:for="{{devices}}" wx:key="index"   data-deviceid="{{item.deviceId}}"
+         data-name="{{item.name || item.localName}}"   data-etcbadge="{{item.etcbadge}}"
+         bindtap="navigateToPage">
+        <view class="weui-cell__bd">
+					<view>{{item.name}}</view>
+          <view class="the_weui_cell_bd_summary">信号强度: {{item.RSSI}}dBm ({{utils.max(0, item.RSSI + 100)}}%)</view>
+          <view class="the_weui_cell_bd_summary">deviceId: {{item.deviceId}}</view>
+          <view class="the_weui_cell_bd_summary">Service数量: {{utils.len(item.advertisServiceUUIDs)}}
+          </view>
+			  </view>
+        <view class="weui-cell__ft">
+          <text class="weui-badge" style="margin-left: 5px;">{{item.etcbadge}}</text>
+        </view>
+      </view>  
+    </view>      
+  </view>
+</view>

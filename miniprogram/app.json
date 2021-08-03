@@ -1,5 +1,5 @@
 {
-  "pages": [
+  "pages": [    
     "pages/bee/bee",
     "pages/index/index",
     "pages/sign/sign",
@@ -15,7 +15,9 @@
     "pages/etcMap/etcMap",
     "pages/jiami/jiami",
     "pages/glyph/glyph",
-    "pages/glyph2/glyph2"
+    "pages/glyph2/glyph2",
+    "pages/bleobu/p1",
+    "pages/bleobu/p2"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
@@ -35,7 +37,7 @@
       "desc": "录音功能"
     }
   },
-  "resizable": true,  
+  "resizable": true,
   "sitemapLocation": "sitemap.json",
   "style": "v2"
 }
