@@ -1,0 +1,16 @@
+package obu;
+syntax = "proto3";
+
+struct BpFixHead
+{
+    unsigned char bMagicNumber;
+    unsigned char bVer;
+    unsigned short nLength;
+    unsigned short nCmdId;
+    unsigned short nSeq;
+};
+
+message BleMessage {
+    BpFixHead = 1;
+    bytes hi = 2; // becomes awesomeField
+};

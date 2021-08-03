@@ -1,0 +1,14 @@
+<view>
+  <view>
+    <button type="primary" plain="True" bindtap="clickme">Click Me </button>
+    <button type="primary" plain="True" bindtap="clearmsg">Clear</button>
+  </view>
+  <view class="pad">
+    <view><text>消息板</text>
+    </view>
+    <view wx:for="{{msg}}">
+      <text>{{item}}</text>
+    </view>
+  </view>
+</view>
+

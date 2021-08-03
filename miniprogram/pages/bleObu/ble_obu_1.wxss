@@ -1,0 +1,14 @@
+.the_weui_cell_bd_summary {
+  font-size: 13px; color: #888;
+}
+
+.tool_menu{
+  display: flex;
+}
+
+.tool_menu_item{
+  border-style: solid;
+  border-color: green;
+  border-radius: 3px;
+  border-width: 1px;
+}

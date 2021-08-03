@@ -1,0 +1,53 @@
+<view class="page" data-weui-theme="{{theme}}">
+  <view class="page__hd">
+    <view class="page__title">A GOOD BEGINNING</view>
+    <view class="page__desc">{{device.name}}</view>
+		<view class="page__desc">{{device.deviceId}}</view>
+    <view class="page__desc">connected: {{connected}}</view>
+    <view class="page__desc">service-uuid: {{service.uuid}}</view>
+    <view class="page__desc">service-primary: {{service.isPrimary}}</view>
+    <view class="page__desc">ch_write: {{ch_write}}</view>
+    <view class="page__desc">ch_read: {{ch_read}}</view>
+    <view class="page__desc">ch_indicate: {{ch_indicate}}</view>
+    <view class="page__desc tool_menu">
+      <button  class="tool_menu_item" 
+      bindtap="sendA2" type="primary" plain="True">设备握手</button>
+      <button bindtap="stopBluetoothDevicesDiscovery" type="primary" plain="True" class="tool_menu_item">读信息</button>
+      <button class="tool_menu_item"
+      bindtap="closeBLEConnection" type="primary" plain="True" >断开连接</button>
+      <button bindtap="closeBluetoothAdapter" type="primary" plain="True" class="tool_menu_item">连接</button>
+    </view>
+  </view>
+  <view class="page__bd">
+		<view class="weui-cells__title">services</view>
+		<view class="weui-cells">
+			<view class="weui-cell weui-cell_active weui-cell_access"
+					wx:for="{{chs}}" wx:key="index" >
+				<view class="weui-cell__bd">
+					<view>{{item.uuid}}</view>
+          <view>read: {{item.properties.read}}</view>	
+          <view>write: {{item.properties.write}}</view>	
+          <view>notify: {{item.properties.notify}}</view>	
+          <view>indicate: {{item.properties.indicate}}</view>			
+				</view>
+			</view>  
+		</view>
+
+    <view class="weui-cells__title">hex data</view>
+    <view class="weui-cells">			
+      <view wx:for="{{msg}}" class="weui-cell weui-cell_active">				
+				<view class="weui-cell__bd">
+					<view>{{item.uuid}}</view>
+					<view class="the_weui_cell_bd_summary">{{item.hexdata}}</view>
+				</view>
+			</view>
+    </view>
+
+  </view>
+  <view class="weui-footer weui-footer_fixed-bottom">
+			<view class="weui-footer__links">
+				<a href="javascript:home();" class="weui-footer__link">天光云影</a>
+			</view>
+			<view class="weui-footer__text">Copyright &copy; 2021</view>
+		</view>
+</view>

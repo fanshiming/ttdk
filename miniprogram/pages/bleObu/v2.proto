@@ -1,0 +1,14 @@
+syntax = "proto3";
+package common;
+message ErrorInfo {
+    fixed32 errorCode = 1;
+    bytes errorMessage = 2;
+}
+
+message AwesomeMessage{
+    fixed32 version     = 1; 
+    fixed32 app         = 2; 
+    fixed32 server      = 3;
+    fixed32 servant     = 4; 
+    bytes data          = 9;
+}

@@ -1,0 +1,7 @@
+<view>
+<button bindtap="test1">click</button>
+<view wx:for="{{msg}}">
+  <text>{{item}}</text>
+</view>
+</view>
+

@@ -1,0 +1,42 @@
+<view class="page" data-weui-theme="{{theme}}">
+  <view class="page__hd">
+    <view class="page__title">{{device.name}}</view>
+    <view class="page__desc">a good beginning</view>
+		<view class="page__desc">{{device.deviceId}}</view>
+  </view>
+  <view class="page__bd">
+		<view class="weui-cells__title">services</view>
+		<view class="weui-cells">
+			<view class="weui-cell weui-cell_active weui-cell_access"
+					wx:for="{{services}}" wx:key="index" >
+				<view class="weui-cell__bd">
+					<view>{{item.uuid}} - isPrimary {{item.isPrimary}}</view>				
+				</view>
+			</view>  
+		</view>
+
+    <view class="weui-cells__title">hex data</view>
+    <view class="weui-cells">			
+      <view class="weui-cell weui-cell_active">				
+				<view class="weui-cell__bd">
+					<view>系统信息</view>
+					<view class="the_weui_cell_bd_summary">AA BB CC DD EE FF 11 22 33 44 55 66 77 88 99 00 AA BB CC DD EE FF 11 22 33 44 55 66 77 88 99 00</view>
+				</view>
+			</view>
+
+      <view class="weui-cell weui-cell_active">				
+				<view class="weui-cell__bd">
+					<view>车辆信息</view>
+					<view class="the_weui_cell_bd_summary">AA BB CC DD EE FF 11 22 33 44 55 66 77 88 99 00</view>
+				</view>
+			</view>
+    </view>
+
+  </view>
+  <view class="weui-footer weui-footer_fixed-bottom">
+			<view class="weui-footer__links">
+				<a href="javascript:home();" class="weui-footer__link">天光云影</a>
+			</view>
+			<view class="weui-footer__text">Copyright &copy; 2021</view>
+		</view>
+</view>

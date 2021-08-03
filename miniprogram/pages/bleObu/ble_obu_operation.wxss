@@ -1,0 +1,3 @@
+.the_weui_cell_bd_summary {
+  font-size: 13px; color: #888;
+}

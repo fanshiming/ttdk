@@ -1,0 +1,25 @@
+<view class="page" data-weui-theme="{{theme}}">
+	<view class="weui-msg">
+		<view class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg"></i></view>
+		<view class="weui-msg__text-area">
+			<h2 class="weui-msg__title">操作失败</h2>
+			<view class="weui-msg__desc">未能打开手机蓝牙设备<a></a></view>
+		</view>
+		<view class="weui-msg__tips-area">
+			<view class="weui-msg__tips">请确认是否授权使用蓝牙的权限，蓝牙设备是否损坏<a>操作指引</a></view>
+		</view>
+		<view class="weui-msg__opr-area">
+			<view class="weui-btn-area">
+				<a href="javascript:history.back();" class="weui-btn weui-btn_default">嗯</a>
+			</view>
+		</view>
+		<view class="weui-msg__extra-area">
+			<view class="weui-footer">
+				<view class="weui-footer__links">
+					<a class="weui-footer__link">天光云影</a>
+				</view>
+				<view class="weui-footer__text">Copyright &copy; 2021</view>
+			</view>
+		</view>
+	</view>
+</view>
