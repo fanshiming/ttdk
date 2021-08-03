@@ -1,0 +1,30 @@
+.pad{
+  border-color:green;
+  border-style:solid;
+  border-width:1px;
+}
+
+.msg{
+  word-break:break-all;
+}
+
+.tool_menu{
+  display: flex;
+}
+
+.tool_menu_item{
+  border-style: solid;
+  border-color: green;
+  border-radius: 3px;
+  border-width: 1px;
+}
+
+.devices_summary {
+  margin-top: 30px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+.the_weui_cell_bd_summary {
+  font-size: 13px; color: #888;
+}
